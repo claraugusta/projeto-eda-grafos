@@ -10,5 +10,9 @@ public class Main {
         System.out.println();
         g.removeEdge(2, 3);
         g.ShowGrafo();
+        System.out.println(g.hasEdge(1, 3)); 
+        System.out.println(g.hasEdge(1, 2)); 
+        System.out.println("Degree node 1: " + g.getDegree(1));
+
     }
 }

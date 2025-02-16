@@ -33,4 +33,10 @@ class Grafo {
             listaAdj.get(u).remove(Integer.valueOf(v));
             listaAdj.get(v).remove(Integer.valueOf(u)); 
     }
+    public boolean hasEdge(int u, int v) {
+        return listaAdj.get(u).contains(v);
+    }
+    public int getDegree(int node) {
+        return listaAdj.get(node).size();
+    }    
 }
