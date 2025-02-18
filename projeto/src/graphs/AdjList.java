@@ -1,14 +1,15 @@
+package graphs;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Grafo {
+class AdjList {
     private int nodes; 
-    private List<List<Integer>> listaAdj; 
+    private List<List<Integer>> listaAdj;
 
-    public Grafo(int nodes) {
+    public AdjList(int nodes) {
         this.nodes = nodes;
         listaAdj = new ArrayList<>();
-        
         for (int i = 0; i < nodes; i++) {
             listaAdj.add(new ArrayList<>());
         }

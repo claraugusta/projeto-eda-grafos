@@ -1,6 +1,8 @@
+package graphs;
+
 public class Main {
     public static void main(String[] args) {
-        Grafo g = new Grafo(5); 
+        AdjList g = new AdjList(5); 
 
         g.addEdge(0, 1);
         g.addEdge(0, 4);

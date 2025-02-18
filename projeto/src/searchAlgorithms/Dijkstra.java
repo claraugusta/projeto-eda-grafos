@@ -1,4 +1,4 @@
-package adjacencyMatrix;
+package searchAlgorithms;
 
 import java.security.InvalidParameterException;
 import java.util.*;
