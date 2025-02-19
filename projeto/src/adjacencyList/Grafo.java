@@ -1,20 +1,19 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class Grafo {
-    private int nodes; 
-    private List<List<Integer>> listaAdj; 
+    private int nodes;
+    private List<List<Integer>> listaAdj;
 
     public Grafo(int nodes) {
         this.nodes = nodes;
         listaAdj = new ArrayList<>();
-        
+
         for (int i = 0; i < nodes; i++) {
             listaAdj.add(new ArrayList<>());
         }
     }
 
-    //para nao direcionado
+    // para nao direcionado
     public void addEdge(int u, int v) {
         listaAdj.get(u).add(v);
         listaAdj.get(v).add(u);
@@ -29,14 +28,39 @@ class Grafo {
             System.out.println();
         }
     }
+
     public void removeEdge(int u, int v) {
-            listaAdj.get(u).remove(Integer.valueOf(v));
-            listaAdj.get(v).remove(Integer.valueOf(u)); 
+        listaAdj.get(u).remove(Integer.valueOf(v));
+        listaAdj.get(v).remove(Integer.valueOf(u));
     }
+
     public boolean hasEdge(int u, int v) {
         return listaAdj.get(u).contains(v);
     }
+
     public int getDegree(int node) {
         return listaAdj.get(node).size();
-    }    
+    }
+
+    public String bfs(int start) {
+        String seq = "";
+        boolean[] visitado = new boolean[nodes];
+        Queue<Integer> fila = new LinkedList<>();
+
+        visitado[start] = true;
+        fila.add(start);
+
+        while (!fila.isEmpty()) {
+            int atual = fila.poll();
+            seq += atual + " ";
+
+            for (int vizinho : listaAdj.get(atual)) {
+                if (!visitado[vizinho]) {
+                    visitado[vizinho] = true;
+                    fila.add(vizinho);
+                }
+            }
+        }
+        return seq;
+    }
 }
