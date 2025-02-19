@@ -1,7 +1,7 @@
-import java.util.*;
 package graphs;
+import java.util.*;
 
-class AdjList {
+public class AdjList {
     private int nodes; 
     private List<List<Integer>> listaAdj;
 
