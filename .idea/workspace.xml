@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ea36570f-d8ec-4696-be41-da3f589c558d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/AdjMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/AdjMatrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +27,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "16",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ufcg/leda/projeto-eda-grafos"
+    "last_opened_file_path": "/home/maria.clara.augusta.santos/leda/projeto-eda-grafos"
   }
 }]]></component>
   <component name="RecentsManager">
