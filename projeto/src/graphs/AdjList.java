@@ -2,8 +2,8 @@ package graphs;
 import java.util.*;
 
 public class AdjList {
-    private int nodes; 
-    private List<List<Integer>> listaAdj;
+    public int nodes;
+    public List<List<Integer>> listaAdj;
 
     public AdjList(int nodes) {
         this.nodes = nodes;
