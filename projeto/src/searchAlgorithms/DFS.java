@@ -1,35 +1,10 @@
 package searchAlgorithms;
 import java.util.*;
 
-public class DFS {
-    private int nodes;
-    private List<List<Integer>> adj;
+public class DFS extends graphs.AdjList {
 
     public DFS(int nodes) {
-        this.nodes = nodes;
-        adj = new ArrayList<>();
-        for (int i = 0; i < nodes; i++) {
-            adj.add(new ArrayList<>());
-        }
-    }
-
-    public void addEdge(int u, int v) {
-        adj.get(u).add(v);
-        adj.get(v).add(u);
-    }
-
-    public void ShowGrafo() {
-        for (int i = 0; i < nodes; i++) {
-            System.out.print("Node " + i + " -> ");
-            for (Integer lado : adj.get(i)) {
-                System.out.print(lado + " ");
-            }
-            System.out.println();
-        }
-    }
-    public void removeEdge(int u, int v) {
-        adj.get(u).remove(Integer.valueOf(v));
-        adj.get(v).remove(Integer.valueOf(u));
+        super(nodes);
     }
 
     public String dfs(int node) {
@@ -45,7 +20,7 @@ public class DFS {
             seq += v + " ";
             stack.pop();
             visited[v] = true;
-            for (int nextNode : adj.get(v)) {
+            for (int nextNode : listaAdj.get(v)) {
                 if(!visited[nextNode]) {
                     stack.push(nextNode);
                 }
