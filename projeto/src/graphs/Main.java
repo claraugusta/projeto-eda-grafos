@@ -1,11 +1,13 @@
 package graphs;
-import searchAlgorithms.DFS;
+import searchAlgorithms.*;
 
 public class Main {
     public static void main(String[] args) {
         AdjList g = new AdjList(5);
+
         DFS g1 = new DFS(8);
 
+        Bfs bf = new Bfs(g, 0);
         g.addEdge(0, 1);
         g.addEdge(0, 4);
         g.addEdge(1, 2);
@@ -15,6 +17,7 @@ public class Main {
         System.out.println(g.hasEdge(1, 3));
         System.out.println(g.hasEdge(0, 2));
         System.out.println("Degree node 1: " + g.getDegree(1));
+        System.out.println("Sequencia bfs: " + bf.runBfs());
 
         System.out.println();
         g1.addEdge(0, 1);
