@@ -12,12 +12,15 @@ public class Bfs{
         this.start = nodeStart;
         this.visitado = new boolean[graph.getNodes()];
     }
+    public Bfs(AdjList adjlist){
+        this.graph = adjlist;
+        this.start = 0;
+        this.visitado = new boolean[graph.getNodes()];
+    }
         
-    public String runBfs() {
+    public boolean runBfs(int target) {
         if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
         if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
-        
-        String seq = "";
         
         Queue<Integer> fila = new LinkedList<>();
 
@@ -26,7 +29,9 @@ public class Bfs{
 
         while (!fila.isEmpty()) {
             int atual = fila.poll();
-            seq += atual + " ";
+            if (atual==target) {
+                return true;
+            }
 
             for (int vizinho : this.graph.getAdj(atual)) {
                 if (!this.visitado[vizinho]) {
@@ -35,6 +40,6 @@ public class Bfs{
                 }
             }
         }
-        return seq;
+        return false;
         }
     }
