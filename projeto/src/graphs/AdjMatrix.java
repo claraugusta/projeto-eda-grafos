@@ -19,6 +19,14 @@ public class AdjMatrix {
         this.adjacencyMatrix = new int[this.maxNodes][this.maxNodes];
     }
 
+    public AdjMatrix(int maxNodes, int[][] matrix){
+        this.maxNodes = maxNodes;
+        this.qtdNodes = 0;
+        this.nodes = new int[maxNodes];
+        this.adjacencyMatrix = matrix;
+    }
+
+
     public int getNodeIndex(int node){
         for (int i = 0; i < this.nodes.length; i++) {
             if(node == this.nodes[i])
@@ -68,6 +76,9 @@ public class AdjMatrix {
                 degree++;
         }
         return degree;
+    }
+    public int[][] getAdjacencyMatrix(){
+        return this.adjacencyMatrix;
     }
 
     public String MatrixToString(){
