@@ -18,7 +18,7 @@ public class Dfs{
         this.visitado = new boolean[this.graph.getNodes()];
     }
         
-    public boolean runDfstarget(int target) {
+    public boolean dfsTarget(int target) {
         if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
         if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
         
@@ -51,7 +51,8 @@ public class Dfs{
         }
         return false;
         }
-        public boolean runDfstarget() {
+
+        public boolean dfs() {
             if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
             if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
             

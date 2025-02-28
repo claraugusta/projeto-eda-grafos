@@ -18,7 +18,7 @@ public class Bfs{
         this.visitado = new boolean[this.graph.getNodes()];
     }
         
-    public boolean runBfs() {
+    public boolean bfs() {
         if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
         if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
         
@@ -48,7 +48,8 @@ public class Bfs{
         }
         return false;
         }
-        public boolean runBfstarget(int target) {
+
+        public boolean bfsTarget(int target) {
             if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
             if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
             

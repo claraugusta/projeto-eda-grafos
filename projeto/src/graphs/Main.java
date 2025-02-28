@@ -17,8 +17,8 @@ public class Main {
         System.out.println(g.hasEdge(1, 3));
         System.out.println(g.hasEdge(0, 2));
         System.out.println("Degree node 1: " + g.getDegree(1));
-        System.out.println(bf.runBfs(3));
-        System.out.println(bf.runBfs(5));
+//        System.out.println(bf.runBfs(3));
+//        System.out.println(bf.runBfs(5));
 
         System.out.println();
 //        g1.addEdge(0, 1);
