@@ -7,4 +7,6 @@ public interface Graph {
     int getWeight(int u, int v);
     int getNodes();
     int size();
+
+    String toString();
 }

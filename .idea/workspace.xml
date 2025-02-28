@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61f0c797-11e2-4e7c-957d-7d105ba82bc2" name="Changes" comment="branch 20">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/AdjList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/BellmanFord.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/Bfs.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/BfsBenchmark.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/DirectedAdjMatrix.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/Dfs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/shortestPath/Johnson.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/Johnson.java" afterDir="false" />
-    </list>
+    <list default="true" id="61f0c797-11e2-4e7c-957d-7d105ba82bc2" name="Changes" comment="branch 20" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,11 +18,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -55,7 +35,6 @@
     "Application.BfsBenchmark.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "36-mudar-dfs-para-classe-sem-usar-extends-novo-metodo-dfs",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Modules",
@@ -95,9 +74,6 @@
       <list>
         <item itemvalue="Application.BfsBenchmark" />
         <item itemvalue="Application.BellmanFord" />
-        <item itemvalue="Application.BfsBenchmark" />
-        <item itemvalue="Application.BellmanFord" />
-        <item itemvalue="Application.BfsBenchmark" />
       </list>
     </recent_temporary>
   </component>

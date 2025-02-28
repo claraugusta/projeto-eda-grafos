@@ -7,7 +7,7 @@ import searchAlgorithms.Bfs;
 import searchAlgorithms.Dfs;
 
 public class BfsBenchmark{
-    public static Graph generateGraph(int size, double density) {
+    public static Graph generateAdjListGraph(int size, double density) {
         Graph graph = new AdjList(size);
         Random rand = new Random();
         for (int i = 0; i < size; i++) {
@@ -19,6 +19,23 @@ public class BfsBenchmark{
         }
         return graph;
     }
+
+    public static Graph generateAdjMatrixGraph(int size, int nullEdgeValue, double density){
+        Graph graph = new AdjMatrix(size, nullEdgeValue);
+        Random rand = new Random();
+        for (int k = 0; k < size; k++) {
+            graph.addNode(k);
+        }
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (rand.nextDouble() < density) {
+                    graph.addEdge(i, j, 1);
+                }
+            }
+        }
+        return graph;
+    }
+
     public static void main(String[] args) {
         int[] sizes = {5,10,100,500,1000,2000};
         Random rand = new Random();
@@ -29,7 +46,7 @@ public class BfsBenchmark{
 
             for (int j = 0; j < 30; j++) {
                 int busca = rand.nextInt(i-1);
-                Graph randGraph = generateGraph(i, 0.5);
+                Graph randGraph = generateAdjListGraph(i, 0.5);
 
                 Bfs bfs = new Bfs(randGraph);
                 long startTimeBfs = System.nanoTime();

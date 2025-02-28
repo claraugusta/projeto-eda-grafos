@@ -45,15 +45,19 @@ public class AdjList implements Graph{
         return false;
     }
 
-    public void ShowGrafo() {
+    @Override
+    public String toString() {
+        String out = "";
         for (int i = 0; i < nodes; i++) {
-            System.out.print("Node " + i + " -> ");
+            out += "Node " + i + " -> ";
             for (Integer lado : adjList.get(i)) {
-                System.out.print(lado + " ");
+                out += lado + " ";
             }
-            System.out.println();
+            out += "\n";
         }
+        return out;
     }
+
     public List<Integer> getAdj(int node){
         return this.adjList.get(node);
     }
