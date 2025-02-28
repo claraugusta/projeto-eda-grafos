@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61f0c797-11e2-4e7c-957d-7d105ba82bc2" name="Changes" comment="branch 20">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/AdjList.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/BellmanFord.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/Bfs.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/BfsBenchmark.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/DirectedAdjMatrix.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/Dfs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/shortestPath/Johnson.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/Johnson.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +33,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -33,21 +49,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.BellmanFord.executor&quot;: &quot;Run&quot;,
-    &quot;Application.BfsBenchmark.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BellmanFord.executor": "Run",
+    "Application.BfsBenchmark.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "36-mudar-dfs-para-classe-sem-usar-extends-novo-metodo-dfs",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.BfsBenchmark">
     <configuration name="BellmanFord" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="shortestPath.BellmanFord" />
@@ -79,6 +95,9 @@
       <list>
         <item itemvalue="Application.BfsBenchmark" />
         <item itemvalue="Application.BellmanFord" />
+        <item itemvalue="Application.BfsBenchmark" />
+        <item itemvalue="Application.BellmanFord" />
+        <item itemvalue="Application.BfsBenchmark" />
       </list>
     </recent_temporary>
   </component>

@@ -26,7 +26,7 @@ public class BfsBenchmark{
 
             double totalTimeBfs = 0;
             double totalTimeDfs = 0;
-            
+
             for (int j = 0; j < 30; j++) {
                 int busca = rand.nextInt(i-1);
                 Graph randGraph = generateGraph(i, 0.5);
@@ -36,10 +36,10 @@ public class BfsBenchmark{
                 bfs.bfsTarget(busca);
                 long endTime = System.nanoTime();
                 totalTimeBfs += (endTime-startTimeBfs)/ 1e6;
-                
+
                 Dfs dfs = new Dfs(randGraph);
                 long startTimeDfs = System.nanoTime();
-                dfs.dfsTarget(busca);
+                dfs.dfsTarget(0, busca);
                 long endTimeDfs = System.nanoTime();
                 totalTimeDfs += (endTimeDfs-startTimeDfs)/ 1e6;
             }
@@ -47,7 +47,7 @@ public class BfsBenchmark{
             totalTimeDfs = totalTimeDfs / 30.0;
             System.out.println("(BFS) size:"+ i + " time: "+ totalTimeBfs + " ms");
             System.out.println("(DFS) size:"+ i + " time: "+ totalTimeDfs + " ms");
-            
+
             System.out.println();
         }
     }
