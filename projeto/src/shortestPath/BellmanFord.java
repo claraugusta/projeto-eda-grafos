@@ -10,9 +10,8 @@ public class BellmanFord {
 
     private final static int INF = Integer.MAX_VALUE;
 
-    public static int[] bellmanFord(Graph graph, int src) {
+    public static int[] bellmanFord(Graph graph, int src, int V) {
 
-        int V = graph.size();
         int[] dist = new int[V];
         Arrays.fill(dist, INF);
         dist[src] = 0;
@@ -57,7 +56,7 @@ public class BellmanFord {
 
         int src = 0;
         System.out.println(adj.getWeight(0,1));
-        int[] ans = bellmanFord(adj, src);
+        int[] ans = bellmanFord(adj, src, adj.size());
         for (int dist : ans)
             System.out.print(dist + " ");
     }

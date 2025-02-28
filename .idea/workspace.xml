@@ -7,6 +7,7 @@
     <list default="true" id="61f0c797-11e2-4e7c-957d-7d105ba82bc2" name="Changes" comment="branch 20">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
