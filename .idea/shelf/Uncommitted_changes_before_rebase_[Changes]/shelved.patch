@@ -1,0 +1,318 @@
+Index: projeto/src/shortestPath/Johnson.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package shortestPath;\r\n\r\nimport graphs.AdjMatrix;\r\nimport graphs.Graph;\r\n\r\nimport static shortestPath.BellmanFord.bellmanFord;\r\n\r\npublic class Johnson {\r\n\r\n    private static final int INF = Integer.MAX_VALUE;\r\n\r\n    public void johnson(Graph graph) {\r\n        int V = graph.size();\r\n\r\n        int s = V; // Novo vértice\r\n        V++; // Aumenta o número de vértices\r\n\r\n        int[] h = bellmanFord(graph, s, s);\r\n\r\n        // Passo 3: Reponderar as arestas\r\n        int[][] alteredGraph = new int[V][V];\r\n        for (int u = 0; u < V; u++) {\r\n            for (int v = 0; v < V; v++) {\r\n                int weight = graph.getWeight(u, v);\r\n                if (weight != INF) {\r\n                    alteredGraph[u][v] = weight + h[u] - h[v];\r\n                } else {\r\n                    alteredGraph[u][v] = INF;\r\n                }\r\n            }\r\n        }\r\n        Graph altGraph = new AdjMatrix(V, alteredGraph);\r\n        for (int u = 0; u < V; u++) {\r\n            int[] dist = dijkstra(altGraph, u);\r\n\r\n            // Ajustar as distâncias para refletir os pesos originais\r\n            for (int v = 0; v < V; v++) {\r\n                if (dist[v] != INF) {\r\n                    dist[v] = dist[v] - h[u] + h[v];\r\n                }\r\n            }\r\n\r\n            // Exibir as distâncias\r\n            System.out.println(\"Distâncias a partir do vértice \" + u + \":\");\r\n            for (int v = 0; v < V; v++) {\r\n                System.out.println(\"Para \" + v + \": \" + dist[v]);\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/projeto/src/shortestPath/Johnson.java b/projeto/src/shortestPath/Johnson.java
+--- a/projeto/src/shortestPath/Johnson.java	(revision b958b82ec03e0d6baa9b5c00dd84d3db9977958d)
++++ b/projeto/src/shortestPath/Johnson.java	(date 1740769037453)
+@@ -1,50 +1,50 @@
+-package shortestPath;
+-
+-import graphs.AdjMatrix;
+-import graphs.Graph;
+-
+-import static shortestPath.BellmanFord.bellmanFord;
+-
+-public class Johnson {
+-
+-    private static final int INF = Integer.MAX_VALUE;
+-
+-    public void johnson(Graph graph) {
+-        int V = graph.size();
+-
+-        int s = V; // Novo vértice
+-        V++; // Aumenta o número de vértices
+-
+-        int[] h = bellmanFord(graph, s, s);
+-
+-        // Passo 3: Reponderar as arestas
+-        int[][] alteredGraph = new int[V][V];
+-        for (int u = 0; u < V; u++) {
+-            for (int v = 0; v < V; v++) {
+-                int weight = graph.getWeight(u, v);
+-                if (weight != INF) {
+-                    alteredGraph[u][v] = weight + h[u] - h[v];
+-                } else {
+-                    alteredGraph[u][v] = INF;
+-                }
+-            }
+-        }
+-        Graph altGraph = new AdjMatrix(V, alteredGraph);
+-        for (int u = 0; u < V; u++) {
+-            int[] dist = dijkstra(altGraph, u);
+-
+-            // Ajustar as distâncias para refletir os pesos originais
+-            for (int v = 0; v < V; v++) {
+-                if (dist[v] != INF) {
+-                    dist[v] = dist[v] - h[u] + h[v];
+-                }
+-            }
+-
+-            // Exibir as distâncias
+-            System.out.println("Distâncias a partir do vértice " + u + ":");
+-            for (int v = 0; v < V; v++) {
+-                System.out.println("Para " + v + ": " + dist[v]);
+-            }
+-        }
+-    }
+-}
++//package shortestPath;
++//
++//import graphs.AdjMatrix;
++//import graphs.Graph;
++//
++//import static shortestPath.BellmanFord.bellmanFord;
++//
++//public class Johnson {
++//
++//    private static final int INF = Integer.MAX_VALUE;
++//
++//    public void johnson(Graph graph) {
++//        int V = graph.size();
++//
++//        int s = V; // Novo vértice
++//        V++; // Aumenta o número de vértices
++//
++//        int[] h = bellmanFord(graph, s, s);
++//
++//        // Passo 3: Reponderar as arestas
++//        int[][] alteredGraph = new int[V][V];
++//        for (int u = 0; u < V; u++) {
++//            for (int v = 0; v < V; v++) {
++//                int weight = graph.getWeight(u, v);
++//                if (weight != INF) {
++//                    alteredGraph[u][v] = weight + h[u] - h[v];
++//                } else {
++//                    alteredGraph[u][v] = INF;
++//                }
++//            }
++//        }
++//        Graph altGraph = new AdjMatrix(V, alteredGraph);
++//        for (int u = 0; u < V; u++) {
++//            int[] dist = dijkstra(altGraph, u);
++//
++//            // Ajustar as distâncias para refletir os pesos originais
++//            for (int v = 0; v < V; v++) {
++//                if (dist[v] != INF) {
++//                    dist[v] = dist[v] - h[u] + h[v];
++//                }
++//            }
++//
++//            // Exibir as distâncias
++//            System.out.println("Distâncias a partir do vértice " + u + ":");
++//            for (int v = 0; v < V; v++) {
++//                System.out.println("Para " + v + ": " + dist[v]);
++//            }
++//        }
++//    }
++//}
+Index: projeto/src/searchAlgorithms/Dfs.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package searchAlgorithms;\r\nimport java.util.*;\r\nimport graphs.*;\r\n\r\npublic class Dfs{\r\n    private Graph graph;\r\n    private int start;\r\n    private boolean[] visitado;\r\n\r\n    public Dfs(Graph graph, int nodeStart){\r\n        this.graph = graph;\r\n        this.start = nodeStart;\r\n        this.visitado = new boolean[this.graph.getNodes()];\r\n    }\r\n    public Dfs(Graph graph){\r\n        this.graph = graph;\r\n        this.start = 0;\r\n        this.visitado = new boolean[this.graph.getNodes()];\r\n    }\r\n        \r\n    public boolean dfsTarget(int target) {\r\n        if (this.graph == null || this.visitado == null) throw new NullPointerException(\"Null graph, try again\");\r\n        if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException(\"Invalid start node, try another number\");\r\n        \r\n        Stack<Integer> pilha = new Stack<Integer>();\r\n\r\n        this.visitado[this.start] = true;\r\n        pilha.push(this.start);\r\n\r\n        while (!pilha.isEmpty()) {\r\n            int atual = pilha.pop();\r\n            if (atual==target) {\r\n                return true;\r\n            }\r\n\r\n            if(this.graph instanceof AdjList){\r\n                for (int vizinho : ((AdjList)this.graph).getAdj(atual)) {\r\n                    if (!this.visitado[vizinho]) {\r\n                        this.visitado[vizinho] = true;\r\n                        pilha.push(vizinho);\r\n                    }\r\n                }\r\n            } else if (this.graph instanceof AdjMatrix) {\r\n                for (int vizinho : ((AdjMatrix)this.graph).getAdj(atual)) {\r\n                    if (!this.visitado[vizinho]) {\r\n                        this.visitado[vizinho] = true;\r\n                        pilha.push(vizinho);\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        return false;\r\n        }\r\n\r\n        public boolean dfs() {\r\n            if (this.graph == null || this.visitado == null) throw new NullPointerException(\"Null graph, try again\");\r\n            if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException(\"Invalid start node, try another number\");\r\n            \r\n            Stack<Integer> pilha = new Stack<Integer>();\r\n    \r\n            this.visitado[this.start] = true;\r\n            pilha.push(this.start);\r\n    \r\n            while (!pilha.isEmpty()) {\r\n                int atual = pilha.pop();\r\n    \r\n                if(this.graph instanceof AdjList){\r\n                    for (int vizinho : ((AdjList)this.graph).getAdj(atual)) {\r\n                        if (!this.visitado[vizinho]) {\r\n                            this.visitado[vizinho] = true;\r\n                            pilha.push(vizinho);\r\n                        }\r\n                    }\r\n                } else if (this.graph instanceof AdjMatrix) {\r\n                    for (int vizinho : ((AdjMatrix)this.graph).getAdj(atual)) {\r\n                        if (!this.visitado[vizinho]) {\r\n                            this.visitado[vizinho] = true;\r\n                            pilha.push(vizinho);\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n            return false;\r\n            }\r\n    }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/projeto/src/searchAlgorithms/Dfs.java b/projeto/src/searchAlgorithms/Dfs.java
+--- a/projeto/src/searchAlgorithms/Dfs.java	(revision b958b82ec03e0d6baa9b5c00dd84d3db9977958d)
++++ b/projeto/src/searchAlgorithms/Dfs.java	(date 1740769860683)
+@@ -4,28 +4,21 @@
+ 
+ public class Dfs{
+     private Graph graph;
+-    private int start;
+     private boolean[] visitado;
+ 
+-    public Dfs(Graph graph, int nodeStart){
+-        this.graph = graph;
+-        this.start = nodeStart;
+-        this.visitado = new boolean[this.graph.getNodes()];
+-    }
+     public Dfs(Graph graph){
+         this.graph = graph;
+-        this.start = 0;
+         this.visitado = new boolean[this.graph.getNodes()];
+     }
+-        
+-    public boolean dfsTarget(int target) {
++
++    public boolean dfsTarget(int start, int target) {
+         if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
+-        if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
+-        
++        if (start > this.visitado.length || start < 0) throw new NullPointerException("Invalid start node, try another number");
++
+         Stack<Integer> pilha = new Stack<Integer>();
+ 
+-        this.visitado[this.start] = true;
+-        pilha.push(this.start);
++        this.visitado[start] = true;
++        pilha.push(start);
+ 
+         while (!pilha.isEmpty()) {
+             int atual = pilha.pop();
+@@ -52,18 +45,17 @@
+         return false;
+         }
+ 
+-        public boolean dfs() {
++        public void dfs(int start) {
+             if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
+-            if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
+-            
++            if (start > this.visitado.length || start < 0) throw new NullPointerException("Invalid start node, try another number");
++
+             Stack<Integer> pilha = new Stack<Integer>();
+-    
+-            this.visitado[this.start] = true;
+-            pilha.push(this.start);
+-    
++            this.visitado[start] = true;
++            pilha.push(start);
++
+             while (!pilha.isEmpty()) {
+                 int atual = pilha.pop();
+-    
++
+                 if(this.graph instanceof AdjList){
+                     for (int vizinho : ((AdjList)this.graph).getAdj(atual)) {
+                         if (!this.visitado[vizinho]) {
+@@ -73,13 +65,12 @@
+                     }
+                 } else if (this.graph instanceof AdjMatrix) {
+                     for (int vizinho : ((AdjMatrix)this.graph).getAdj(atual)) {
+-                        if (!this.visitado[vizinho]) {
++                        if (vizinho != 0 && !this.visitado[vizinho]) {
+                             this.visitado[vizinho] = true;
+                             pilha.push(vizinho);
+                         }
+                     }
+                 }
+             }
+-            return false;
+-            }
++        }
+     }
+Index: projeto/src/benchmark/BfsBenchmark.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package benchmark;\r\n\r\nimport java.util.*;\r\nimport graphs.*;\r\n\r\nimport searchAlgorithms.Bfs;\r\nimport searchAlgorithms.Dfs;\r\n\r\npublic class BfsBenchmark{\r\n    public static Graph generateGraph(int size, double density) {\r\n        Graph graph = new AdjList(size);\r\n        Random rand = new Random();\r\n        for (int i = 0; i < size; i++) {\r\n            for (int j = i + 1; j < size; j++) {\r\n                if (rand.nextDouble() < density) {\r\n                    graph.addEdge(i, j, 1);\r\n                }\r\n            }\r\n        }\r\n        return graph;\r\n    }\r\n    public static void main(String[] args) {\r\n        int[] sizes = {5,10,100,500,1000,2000};\r\n        Random rand = new Random();\r\n        for (int i : sizes) {\r\n\r\n            double totalTimeBfs = 0;\r\n            double totalTimeDfs = 0;\r\n            \r\n            for (int j = 0; j < 30; j++) {\r\n                int busca = rand.nextInt(i-1);\r\n                Graph randGraph = generateGraph(i, 0.5);\r\n\r\n                Bfs bfs = new Bfs(randGraph);\r\n                long startTimeBfs = System.nanoTime();\r\n                bfs.bfsTarget(busca);\r\n                long endTime = System.nanoTime();\r\n                totalTimeBfs += (endTime-startTimeBfs)/ 1e6;\r\n                \r\n                Dfs dfs = new Dfs(randGraph);\r\n                long startTimeDfs = System.nanoTime();\r\n                dfs.dfsTarget(busca);\r\n                long endTimeDfs = System.nanoTime();\r\n                totalTimeDfs += (endTimeDfs-startTimeDfs)/ 1e6;\r\n            }\r\n            totalTimeBfs = totalTimeBfs / 30.0;\r\n            totalTimeDfs = totalTimeDfs / 30.0;\r\n            System.out.println(\"(BFS) size:\"+ i + \" time: \"+ totalTimeBfs + \" ms\");\r\n            System.out.println(\"(DFS) size:\"+ i + \" time: \"+ totalTimeDfs + \" ms\");\r\n            \r\n            System.out.println();\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/projeto/src/benchmark/BfsBenchmark.java b/projeto/src/benchmark/BfsBenchmark.java
+--- a/projeto/src/benchmark/BfsBenchmark.java	(revision b958b82ec03e0d6baa9b5c00dd84d3db9977958d)
++++ b/projeto/src/benchmark/BfsBenchmark.java	(date 1740769418789)
+@@ -39,7 +39,7 @@
+                 
+                 Dfs dfs = new Dfs(randGraph);
+                 long startTimeDfs = System.nanoTime();
+-                dfs.dfsTarget(busca);
++                dfs.dfsTarget(0, busca);
+                 long endTimeDfs = System.nanoTime();
+                 totalTimeDfs += (endTimeDfs-startTimeDfs)/ 1e6;
+             }
+Index: projeto/src/graphs/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package graphs;\r\nimport searchAlgorithms.*;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        AdjList g = new AdjList(5);\r\n\r\n        //Dfs g1 = new Dfs(8);\r\n\r\n        Bfs bf = new Bfs(g, 0);\r\n        g.addEdge(0, 1,1);\r\n        g.addEdge(0, 4,1);\r\n        g.addEdge(1, 2,1);\r\n        g.addEdge(1, 3,1);\r\n        g.addEdge(4, 3,1);\r\n         g.ShowGrafo();\r\n        System.out.println(g.hasEdge(1, 3));\r\n        System.out.println(g.hasEdge(0, 2));\r\n        System.out.println(\"Degree node 1: \" + g.getDegree(1));\r\n//        System.out.println(bf.runBfs(3));\r\n//        System.out.println(bf.runBfs(5));\r\n\r\n        System.out.println();\r\n//        g1.addEdge(0, 1);\r\n//        g1.addEdge(0, 2);\r\n//        g1.addEdge(1, 3);\r\n//        g1.addEdge(3, 4);\r\n//        g1.addEdge(3, 6);\r\n//        g1.addEdge(2, 5);\r\n//        g1.addEdge(5, 7);\r\n//\r\n//        g1.ShowGrafo();\r\n        //System.out.println(g1.dfs(0));\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/projeto/src/graphs/Main.java b/projeto/src/graphs/Main.java
+--- a/projeto/src/graphs/Main.java	(revision b958b82ec03e0d6baa9b5c00dd84d3db9977958d)
++++ b/projeto/src/graphs/Main.java	(date 1740769878562)
+@@ -5,7 +5,7 @@
+     public static void main(String[] args) {
+         AdjList g = new AdjList(5);
+ 
+-        //Dfs g1 = new Dfs(8);
++        Dfs g1 = new Dfs(g);
+ 
+         Bfs bf = new Bfs(g, 0);
+         g.addEdge(0, 1,1);
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"61f0c797-11e2-4e7c-957d-7d105ba82bc2\" name=\"Changes\" comment=\"branch 20\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2tXuRzbPkgxRa4oIGybd9wW4xhD\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.BellmanFord.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.BfsBenchmark.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.BfsBenchmark\">\r\n    <configuration name=\"BellmanFord\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"shortestPath.BellmanFord\" />\r\n      <module name=\"projeto-eda-grafos\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"shortestPath.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"BfsBenchmark\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"benchmark.BfsBenchmark\" />\r\n      <module name=\"projeto-eda-grafos\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"benchmark.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.BfsBenchmark\" />\r\n        <item itemvalue=\"Application.BellmanFord\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task id=\"LOCAL-00001\" summary=\"branch 20\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1740097852838</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1740097852838</updated>\r\n    </task>\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"61f0c797-11e2-4e7c-957d-7d105ba82bc2\" name=\"Changes\" comment=\"branch 20\" />\r\n      <created>1740510738858</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1740510738858</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"branch 20\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"branch 20\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b958b82ec03e0d6baa9b5c00dd84d3db9977958d)
++++ b/.idea/workspace.xml	(date 1740769418983)
+@@ -6,8 +6,10 @@
+   <component name="ChangeListManager">
+     <list default="true" id="61f0c797-11e2-4e7c-957d-7d105ba82bc2" name="Changes" comment="branch 20">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/projeto/src/shortestPath/Johnson.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/Johnson.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -24,6 +26,18 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "Luisprog1"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/claraugusta/projeto-eda-grafos.git",
++    "accountId": "282d8f2f-1003-4c83-bcb2-71a1aef554f7"
++  }
++}]]></component>
+   <component name="ProjectColorInfo">{
+   &quot;customColor&quot;: &quot;&quot;,
+   &quot;associatedIndex&quot;: 0
+@@ -33,22 +47,24 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.BellmanFord.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.BfsBenchmark.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.BellmanFord.executor": "Run",
++    "Application.BfsBenchmark.executor": "Run",
++    "Application.Main.executor": "Run",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "RunOnceActivity.git.unshallow": "true",
++    "git-widget-placeholder": "main",
++    "ignore.virus.scanning.warn.message": "true",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "C:/projeto-eda-grafos",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "preferences.lookFeel"
+   }
+-}</component>
+-  <component name="RunManager" selected="Application.BfsBenchmark">
++}]]></component>
++  <component name="RunManager">
+     <configuration name="BellmanFord" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="shortestPath.BellmanFord" />
+       <module name="projeto-eda-grafos" />
