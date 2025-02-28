@@ -37,6 +37,8 @@ public class BfsBenchmark{
     }
 
     public static void main(String[] args) {
+        generateAdjMatrixGraph(9,0,0.5);
+
         int[] sizes = {5,10,100,500,1000,2000};
         Random rand = new Random();
         for (int i : sizes) {

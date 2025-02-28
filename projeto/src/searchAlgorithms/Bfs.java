@@ -38,7 +38,7 @@ public class Bfs{
                     }
                 }
             } else if (this.graph instanceof AdjMatrix) {
-                for (int neighbors : ((AdjMatrix)this.graph).getAdj(current)) {
+                for (int neighbors : ((AdjMatrix)this.graph).getAdjNodes(current)) {
                     if (neighbors != 0 && !this.visited[neighbors]) {
                         this.visited[neighbors] = true;
                         q.add(neighbors);
@@ -72,7 +72,7 @@ public class Bfs{
                         }
                     }
                 } else if (this.graph instanceof AdjMatrix) {
-                    for (int neighbors : ((AdjMatrix)this.graph).getAdj(current)) {
+                    for (int neighbors : ((AdjMatrix)this.graph).getAdjNodes(current)) {
                         if (!this.visited[neighbors]) {
                             this.visited[neighbors] = true;
                             q.add(neighbors);

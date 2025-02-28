@@ -1,5 +1,7 @@
 package graphs;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,6 +69,15 @@ public class AdjMatrix implements Graph{
 
     public List<Integer> getAdj(int node){
         return Arrays.stream(this.adjMatrix[getNodeIndex(node)]).boxed().toList();
+    }
+
+    public List<Integer> getAdjNodes(int node){
+        List<Integer> nodesAdj = new ArrayList<>();
+        for(int i = 0; i < this.maxNodes; i++){
+            if(this.adjMatrix[node][i] != nullEdgeValue)
+                nodesAdj.add(i);
+        }
+        return nodesAdj;
     }
 
     @Override
