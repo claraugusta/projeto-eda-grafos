@@ -39,7 +39,7 @@ public class Bfs{
                 }
             } else if (this.graph instanceof AdjMatrix) {
                 for (int neighbors : ((AdjMatrix)this.graph).getAdj(current)) {
-                    if (!this.visited[neighbors]) {
+                    if (neighbors != 0 && !this.visited[neighbors]) {
                         this.visited[neighbors] = true;
                         q.add(neighbors);
                     }
