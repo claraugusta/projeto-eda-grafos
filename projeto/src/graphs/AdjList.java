@@ -1,49 +1,79 @@
 package graphs;
 import java.util.*;
 
-public class AdjList {
+public class AdjList implements Graph{
 
     public int nodes;
-    public List<List<Integer>> listaAdj;
+    public List<List<Integer>> adjList;
 
     public AdjList(int nodes) {
         this.nodes = nodes;
-        listaAdj = new ArrayList<>();
+        adjList = new ArrayList<>();
         for (int i = 0; i < nodes; i++) {
-            listaAdj.add(new ArrayList<>());
+            adjList.add(new ArrayList<>());
         }
     }
 
+    @Override
+    public int size() {
+        return this.adjList.size();
+    }
+
+    @Override
+    public boolean addNode(int node) {
+        if (!adjList.contains(node)) {
+            adjList.add(node, new ArrayList<>());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addEdge(int u, int v, int weight) {
+        // Para um grafo não ponderado, ignoramos o peso
+        return addEdge(u, v);
+    }
+
     // para nao direcionado
-    public void addEdge(int u, int v) {
-        listaAdj.get(u).add(v);
-        listaAdj.get(v).add(u);
+
+    public boolean addEdge(int u, int v) {
+        if(u < nodes && v < nodes){
+            adjList.get(u).add(v);
+            adjList.get(v).add(u);
+            return true;
+        }
+        return false;
     }
 
     public void ShowGrafo() {
         for (int i = 0; i < nodes; i++) {
             System.out.print("Node " + i + " -> ");
-            for (Integer lado : listaAdj.get(i)) {
+            for (Integer lado : adjList.get(i)) {
                 System.out.print(lado + " ");
             }
             System.out.println();
         }
     }
     public List<Integer> getAdj(int node){
-        return this.listaAdj.get(node);
+        return this.adjList.get(node);
     }
 
     public void removeEdge(int u, int v) {
-        listaAdj.get(u).remove(Integer.valueOf(v));
-        listaAdj.get(v).remove(Integer.valueOf(u));
+        adjList.get(u).remove(Integer.valueOf(v));
+        adjList.get(v).remove(Integer.valueOf(u));
     }
 
     public boolean hasEdge(int u, int v) {
-        return listaAdj.get(u).contains(v);
+        return adjList.get(u).contains(v);
+    }
+
+    @Override
+    public int getWeight(int u, int v) {
+        return 1;
     }
 
     public int getDegree(int node) {
-        return listaAdj.get(node).size();
+        return adjList.get(node).size();
     }
     public int getNodes() {
         return nodes;

@@ -1,7 +1,5 @@
 package graphs;
 
-import java.util.Arrays;
-
 //grafo direcionado e ponderado
 public class DirectedAdjMatrix {
 

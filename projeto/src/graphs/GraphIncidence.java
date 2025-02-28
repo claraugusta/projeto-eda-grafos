@@ -13,6 +13,7 @@ public class GraphIncidence {
     }
 
     // Adiciona um nó ao grafo
+
     public boolean addNode(int node) {
         if (!nodes.contains(node)) {
             nodes.add(node);
@@ -22,7 +23,8 @@ public class GraphIncidence {
     }
 
     // Adiciona uma aresta entre dois nós
-    public boolean addEdge(int node1, int node2) {
+
+    public boolean addEdge(int node1, int node2, int weight) {
         if (nodes.contains(node1) && nodes.contains(node2)) {
             edges.add(new int[]{node1, node2});
             return true;
