@@ -69,7 +69,7 @@ public class AdjList implements Graph{
 
     @Override
     public int getWeight(int u, int v) {
-        return 0;
+        return 1;
     }
 
     public int getDegree(int node) {

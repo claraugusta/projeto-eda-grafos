@@ -1,8 +1,6 @@
 package searchAlgorithms;
 import java.util.*;
-import graphs.AdjList;
-import graphs.AdjMatrix;
-import graphs.Graph;
+import graphs.*;
 
 public class Bfs{
     private Graph graph;
@@ -20,7 +18,7 @@ public class Bfs{
         this.visitado = new boolean[this.graph.getNodes()];
     }
         
-    public boolean runBfs(int target) {
+    public boolean runBfs() {
         if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
         if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
         
@@ -31,9 +29,6 @@ public class Bfs{
 
         while (!fila.isEmpty()) {
             int atual = fila.poll();
-            if (atual==target) {
-                return true;
-            }
 
             if(this.graph instanceof AdjList){
                 for (int vizinho : ((AdjList)this.graph).getAdj(atual)) {
@@ -53,4 +48,37 @@ public class Bfs{
         }
         return false;
         }
+        public boolean runBfstarget(int target) {
+            if (this.graph == null || this.visitado == null) throw new NullPointerException("Null graph, try again");
+            if (this.start > this.visitado.length || this.start < 0) throw new NullPointerException("Invalid start node, try another number");
+            
+            Queue<Integer> fila = new LinkedList<>();
+    
+            this.visitado[this.start] = true;
+            fila.add(this.start);
+    
+            while (!fila.isEmpty()) {
+                int atual = fila.poll();
+                if (atual==target) {
+                    return true;
+                }
+    
+                if(this.graph instanceof AdjList){
+                    for (int vizinho : ((AdjList)this.graph).getAdj(atual)) {
+                        if (!this.visitado[vizinho]) {
+                            this.visitado[vizinho] = true;
+                            fila.add(vizinho);
+                        }
+                    }
+                } else if (this.graph instanceof AdjMatrix) {
+                    for (int vizinho : ((AdjMatrix)this.graph).getAdj(atual)) {
+                        if (!this.visitado[vizinho]) {
+                            this.visitado[vizinho] = true;
+                            fila.add(vizinho);
+                        }
+                    }
+                }
+            }
+            return false;
+            }
     }
