@@ -6,12 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="61f0c797-11e2-4e7c-957d-7d105ba82bc2" name="Changes" comment="branch 20">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/AdjList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/AdjList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/AdjMatrix.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/AdjMatrix.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/GraphIncidence.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/GraphIncidence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/graphs/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/BellmanFord.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/Bfs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/Bfs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/DFS.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projeto-eda-grafos/searchAlgorithms/Dijkstra.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/benchmark/BfsBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/AdjList.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/AdjList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/AdjMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/AdjMatrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/GraphIncidence.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/GraphIncidence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/graphs/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/graphs/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/BellmanFord.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/BellmanFord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Bfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projeto/src/searchAlgorithms/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/projeto/src/shortestPath/Dijkstra.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,6 +51,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BellmanFord.executor": "Run",
+    "Application.BfsBenchmark.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
@@ -39,13 +63,26 @@
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.BfsBenchmark">
     <configuration name="BellmanFord" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="searchAlgorithms.BellmanFord" />
+      <option name="MAIN_CLASS_NAME" value="shortestPath.BellmanFord" />
       <module name="projeto-eda-grafos" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="searchAlgorithms.*" />
+          <option name="PATTERN" value="shortestPath.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BfsBenchmark" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="benchmark.BfsBenchmark" />
+      <module name="projeto-eda-grafos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="benchmark.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -55,6 +92,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BfsBenchmark" />
         <item itemvalue="Application.BellmanFord" />
       </list>
     </recent_temporary>

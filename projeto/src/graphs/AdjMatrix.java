@@ -1,29 +1,30 @@
 package graphs;
 
 import java.util.Arrays;
+import java.util.List;
 
 //grafo nao direcionado e ponderado
-public class AdjMatrix {
+public class AdjMatrix implements Graph{
 
     private int nullEdgeValue;
     private int maxNodes;
     private int qtdNodes;
     private int[] nodes;
-    private int[][] adjacencyMatrix;
+    private int[][] adjMatrix;
 
     public AdjMatrix(int maxNodes, int nullEdgeValue){
         this.maxNodes = maxNodes;
         this.nullEdgeValue = nullEdgeValue;
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
-        this.adjacencyMatrix = new int[this.maxNodes][this.maxNodes];
+        this.adjMatrix = new int[this.maxNodes][this.maxNodes];
     }
 
     public AdjMatrix(int maxNodes, int[][] matrix){
         this.maxNodes = maxNodes;
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
-        this.adjacencyMatrix = matrix;
+        this.adjMatrix = matrix;
     }
 
 
@@ -39,6 +40,7 @@ public class AdjMatrix {
         return this.qtdNodes == this.maxNodes;
     }
 
+    @Override
     public boolean addNode(int node){
         if(isFull())
             return false;
@@ -47,23 +49,33 @@ public class AdjMatrix {
         return true;
     }
 
+    @Override
     public boolean addEdge(int nodeIn, int nodeOut, int weigth){
         int l = getNodeIndex(nodeOut);
         int c = getNodeIndex(nodeIn);
         if(l == -1 || c == -1)
             return false;
         //funciona pra grafos nao direcionados
-        this.adjacencyMatrix[l][c] = weigth;
-        this.adjacencyMatrix[c][l] = weigth;
+        this.adjMatrix[l][c] = weigth;
+        this.adjMatrix[c][l] = weigth;
         return true;
     }
 
+    public int getNodes(){
+        return this.nodes.length;
+    }
+
+    public List<Integer> getAdj(int node){
+        return Arrays.stream(this.adjMatrix[getNodeIndex(node)]).boxed().toList();
+    }
+
+    @Override
     public int getWeight(int nodeOut, int nodeIn){
         int l = getNodeIndex(nodeOut);
         int c = getNodeIndex(nodeIn);
         if(l == -1 || c == -1)
             return -1;
-        return this.adjacencyMatrix[l][c];
+        return this.adjMatrix[l][c];
     }
 
     public int getDegree(int node){
@@ -72,13 +84,13 @@ public class AdjMatrix {
             return -1;
         int degree = 0;
         for (int i = 0; i < maxNodes; i++) {
-            if(this.adjacencyMatrix[l][i] != this.nullEdgeValue)
+            if(this.adjMatrix[l][i] != this.nullEdgeValue)
                 degree++;
         }
         return degree;
     }
     public int[][] getAdjacencyMatrix(){
-        return this.adjacencyMatrix;
+        return this.adjMatrix;
     }
 
     public String MatrixToString(){
@@ -86,11 +98,16 @@ public class AdjMatrix {
         for (int i = 0; i < this.maxNodes; i++) {
             String l = "";
             for (int j = 0; j < this.maxNodes; j++) {
-                l += this.adjacencyMatrix[i][j] + " ";
+                l += this.adjMatrix[i][j] + " ";
             }
             out += l + "\n";
         }
         return out;
+    }
+
+    @Override
+    public int size() {
+        return this.adjMatrix.length;
     }
 
     public String nodesToString(){

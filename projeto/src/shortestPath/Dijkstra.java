@@ -1,7 +1,8 @@
-package searchAlgorithms;
+package shortestPath;
 
 import java.security.InvalidParameterException;
 import java.util.*;
+
 
 public class Dijkstra {
 

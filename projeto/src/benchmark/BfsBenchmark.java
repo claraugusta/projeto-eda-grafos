@@ -1,15 +1,17 @@
+package benchmark;
+
 import java.util.*;
 import graphs.*;
 import searchAlgorithms.Bfs;
 
 public class BfsBenchmark{
-    public static AdjList generateGraph(int size, double density) {
-        AdjList graph = new AdjList(size);
+    public static Graph generateGraph(int size, double density) {
+        Graph graph = new AdjList(size);
         Random rand = new Random();
         for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
                 if (rand.nextDouble() < density) {
-                    graph.addEdge(i, j);
+                    graph.addEdge(i, j, 1);
                 }
             }
         }
