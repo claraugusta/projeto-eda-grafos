@@ -33,13 +33,13 @@ public class BfsBenchmark{
 
                 Bfs bfs = new Bfs(randGraph);
                 long startTimeBfs = System.nanoTime();
-                bfs.runBfstarget(busca);
+                bfs.bfsTarget(busca);
                 long endTime = System.nanoTime();
                 totalTimeBfs += (endTime-startTimeBfs)/ 1e6;
                 
                 Dfs dfs = new Dfs(randGraph);
                 long startTimeDfs = System.nanoTime();
-                dfs.runDfstarget(busca);
+                dfs.dfsTarget(busca);
                 long endTimeDfs = System.nanoTime();
                 totalTimeDfs += (endTimeDfs-startTimeDfs)/ 1e6;
             }
