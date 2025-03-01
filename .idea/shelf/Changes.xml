@@ -1,0 +1,24 @@
+<changelist name="Changes" date="1740775534372" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" />
+  <option name="DESCRIPTION" value="Changes" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/projeto-eda-grafos/searchAlgorithms/Bfs.class" />
+    <option name="AFTER_PATH" value="out/production/projeto-eda-grafos/searchAlgorithms/Bfs.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/Bfs.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/projeto-eda-grafos/benchmark/BfsBenchmark.class" />
+    <option name="AFTER_PATH" value="out/production/projeto-eda-grafos/benchmark/BfsBenchmark.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/BfsBenchmark.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/projeto-eda-grafos/searchAlgorithms/Dfs.class" />
+    <option name="AFTER_PATH" value="out/production/projeto-eda-grafos/searchAlgorithms/Dfs.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/Dfs.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/projeto-eda-grafos/graphs/Main.class" />
+    <option name="AFTER_PATH" value="out/production/projeto-eda-grafos/graphs/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/Main.class" />
+  </binary>
+</changelist>
