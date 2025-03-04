@@ -37,6 +37,8 @@ public class BfsBenchmark{
     }
 
     public static void main(String[] args) {
+        Bfs b = new Bfs();
+        Dfs d = new Dfs();
         generateAdjMatrixGraph(9,0,0.5);
 
         int[] sizes = {5,10,100,500,1000,2000};
@@ -50,15 +52,13 @@ public class BfsBenchmark{
                 int busca = rand.nextInt(i-1);
                 Graph randGraph = generateAdjListGraph(i, 0.5);
 
-                Bfs bfs = new Bfs(randGraph);
                 long startTimeBfs = System.nanoTime();
-                bfs.bfsTarget(busca);
+                b.bfsTarget(randGraph, 0, busca);
                 long endTime = System.nanoTime();
                 totalTimeBfs += (endTime-startTimeBfs)/ 1e6;
 
-                Dfs dfs = new Dfs(randGraph);
                 long startTimeDfs = System.nanoTime();
-                dfs.dfsTarget(0, busca);
+                d.dfsTarget(randGraph, 0, busca);
                 long endTimeDfs = System.nanoTime();
                 totalTimeDfs += (endTimeDfs-startTimeDfs)/ 1e6;
             }

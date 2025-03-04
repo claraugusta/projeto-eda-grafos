@@ -63,15 +63,11 @@ public class AdjMatrix implements Graph{
         return true;
     }
 
-    public int getNodes(){
+    public int numberOfNodes(){
         return this.nodes.length;
     }
 
     public List<Integer> getAdj(int node){
-        return Arrays.stream(this.adjMatrix[getNodeIndex(node)]).boxed().toList();
-    }
-
-    public List<Integer> getAdjNodes(int node){
         List<Integer> nodesAdj = new ArrayList<>();
         for(int i = 0; i < this.maxNodes; i++){
             if(this.adjMatrix[node][i] != nullEdgeValue)

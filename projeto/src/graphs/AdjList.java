@@ -79,8 +79,9 @@ public class AdjList implements Graph{
     public int getDegree(int node) {
         return adjList.get(node).size();
     }
-    public int getNodes() {
-        return nodes;
+
+    public int numberOfNodes() {
+        return this.nodes;
     }
 
 }
