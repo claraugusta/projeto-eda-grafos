@@ -96,9 +96,6 @@ public class AdjMatrix implements Graph{
         }
         return degree;
     }
-    public int[][] getAdjacencyMatrix(){
-        return this.adjMatrix;
-    }
 
     public String MatrixToString(){
         String out = "";
