@@ -3,7 +3,6 @@ package shortestPath;
 import java.security.InvalidParameterException;
 import java.util.*;
 
-
 public class Dijkstra {
 
     private int vertices[][];
@@ -12,104 +11,104 @@ public class Dijkstra {
         vertices = new int[numVertices][numVertices];
     }
 
-    public void criarAresta(final int noOrigem, final int noDestino, final int peso) {
-        // Dijkstra só funciona com pesos positivos
-        if (peso >= 1) {
-            vertices[noOrigem][noDestino] = peso;
-            vertices[noDestino][noOrigem] = peso;
+    public void createEdge(final int sourceNode, final int destinationNode, final int weight) {
+        // Dijkstra only works with positive weights
+        if (weight >= 1) {
+            vertices[sourceNode][destinationNode] = weight;
+            vertices[destinationNode][sourceNode] = weight;
         } else {
             throw new InvalidParameterException(
-                "O peso do nó origem [" + noOrigem + "] para o nó destino [" + noDestino + "] não pode ser negativo"
+                "The weight from source node [" + sourceNode + "] to destination node [" + destinationNode + "] cannot be negative"
             );
         }
     }
 
-    public int getMaisProximo(final int listaCustos[], final Set<Integer> naoVisitados) {
-        int minDistancia = Integer.MAX_VALUE;
-        int noProximo = -1;
+    public int getClosestNode(final int costList[], final Set<Integer> unvisitedNodes) {
+        int minDistance = Integer.MAX_VALUE;
+        int closestNode = -1;
 
-        for (Integer i : naoVisitados) {
-            if (listaCustos[i] < minDistancia) {
-                minDistancia = listaCustos[i];
-                noProximo = i;
+        for (Integer i : unvisitedNodes) {
+            if (costList[i] < minDistance) {
+                minDistance = costList[i];
+                closestNode = i;
             }
         }
 
-        return noProximo;
+        return closestNode;
     }
 
-    public List<Integer> getVizinhos(final int no) {
-        List<Integer> vizinhos = new ArrayList<>();
+    public List<Integer> getNeighbors(final int node) {
+        List<Integer> neighbors = new ArrayList<>();
         for (int i = 0; i < vertices.length; i++) {
-            if (vertices[no][i] > 0) {
-                vizinhos.add(i);
+            if (vertices[node][i] > 0) {
+                neighbors.add(i);
             }
         }
-        return vizinhos;
+        return neighbors;
     }
 
-    public int getCusto(final int noOrigem, final int noDestino) {
-        return vertices[noOrigem][noDestino];
+    public int getCost(final int sourceNode, final int destinationNode) {
+        return vertices[sourceNode][destinationNode];
     }
 
-    public List<Integer> caminhoMinimo(final int noOrigem, final int noDestino) {
-        int custo[] = new int[vertices.length];
-        int antecessor[] = new int[vertices.length];
-        Set<Integer> naoVisitados = new HashSet<>();
+    public List<Integer> shortestPath(final int sourceNode, final int destinationNode) {
+        int cost[] = new int[vertices.length];
+        int predecessor[] = new int[vertices.length];
+        Set<Integer> unvisitedNodes = new HashSet<>();
 
-        Arrays.fill(custo, Integer.MAX_VALUE);
-        custo[noOrigem] = 0;
+        Arrays.fill(cost, Integer.MAX_VALUE);
+        cost[sourceNode] = 0;
         
-        Arrays.fill(antecessor, -1);
+        Arrays.fill(predecessor, -1);
 
         for (int v = 0; v < vertices.length; v++) {
-            naoVisitados.add(v);
+            unvisitedNodes.add(v);
         }
 
-        while (!naoVisitados.isEmpty()) {
-            int noMaisProximo = getMaisProximo(custo, naoVisitados);
-            if (noMaisProximo == -1) break; // Evita loop infinito
+        while (!unvisitedNodes.isEmpty()) {
+            int closestNode = getClosestNode(cost, unvisitedNodes);
+            if (closestNode == -1) break; // Avoid infinite loop
 
-            naoVisitados.remove(noMaisProximo);
+            unvisitedNodes.remove(closestNode);
 
-            for (Integer vizinho : getVizinhos(noMaisProximo)) {
-                int custoTotal = custo[noMaisProximo] + getCusto(noMaisProximo, vizinho);
+            for (Integer neighbor : getNeighbors(closestNode)) {
+                int totalCost = cost[closestNode] + getCost(closestNode, neighbor);
 
-                if (custoTotal < custo[vizinho]) {
-                    custo[vizinho] = custoTotal;
-                    antecessor[vizinho] = noMaisProximo;
+                if (totalCost < cost[neighbor]) {
+                    cost[neighbor] = totalCost;
+                    predecessor[neighbor] = closestNode;
                 }
             }
 
-            if (noMaisProximo == noDestino) {
-                return caminhoMaisProximo(antecessor, noDestino);
+            if (closestNode == destinationNode) {
+                return buildPath(predecessor, destinationNode);
             }
         }
         
-        return Collections.emptyList(); // Retorna lista vazia caso não haja caminho
+        return Collections.emptyList(); // Return an empty list if no path exists
     }
 
-    public List<Integer> caminhoMaisProximo(final int antecessor[], int noMaisProximo) {
-        List<Integer> caminho = new ArrayList<>();
-        while (noMaisProximo != -1) {
-            caminho.add(noMaisProximo);
-            noMaisProximo = antecessor[noMaisProximo];
+    public List<Integer> buildPath(final int predecessor[], int closestNode) {
+        List<Integer> path = new ArrayList<>();
+        while (closestNode != -1) {
+            path.add(closestNode);
+            closestNode = predecessor[closestNode];
         }
-        Collections.reverse(caminho);
-        return caminho;
+        Collections.reverse(path);
+        return path;
     }
 
     public static void main(String[] args) {
-        Dijkstra grafo = new Dijkstra(6);
-        grafo.criarAresta(0, 1, 4);
-        grafo.criarAresta(0, 2, 2);
-        grafo.criarAresta(1, 2, 5);
-        grafo.criarAresta(1, 3, 10);
-        grafo.criarAresta(2, 4, 3);
-        grafo.criarAresta(3, 5, 6);
-        grafo.criarAresta(4, 3, 2);
-        grafo.criarAresta(4, 5, 8);
+        Dijkstra graph = new Dijkstra(6);
+        graph.createEdge(0, 1, 4);
+        graph.createEdge(0, 2, 2);
+        graph.createEdge(1, 2, 5);
+        graph.createEdge(1, 3, 10);
+        graph.createEdge(2, 4, 3);
+        graph.createEdge(3, 5, 6);
+        graph.createEdge(4, 3, 2);
+        graph.createEdge(4, 5, 8);
 
-        System.out.println("Caminho mínimo de 0 para 5: " + grafo.caminhoMinimo(0, 5));
+        System.out.println("Shortest path from 0 to 5: " + graph.shortestPath(0, 5));
     }
 }
