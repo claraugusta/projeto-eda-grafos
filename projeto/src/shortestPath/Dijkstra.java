@@ -4,72 +4,68 @@ import graphs.*;
 import java.util.*;
 
 public class Dijkstra {
-    private AdjMatrix graph;
 
-    public Dijkstra(AdjMatrix graph) {
-        this.graph = graph;
-    }
+    public static Map<Integer, Integer> dijkstra(Graph graph, int source) {
+        int n = graph.size();
+        Map<Integer, Integer> dist = new HashMap<>(); 
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1])); 
 
-    public List<Integer> shortestPath(final int sourceNode, final int targetNode) {
-        int size = graph.getNodes();
-        int[] cost = new int[size];
-        int[] predecessor = new int[size];
-        PriorityQueue<int[]> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        // Inicializa as distâncias e a fila de prioridade
+        for (int i = 0; i < n; i++) {
+            dist.put(i, Integer.MAX_VALUE); 
+        }
+        dist.put(source, 0);
+        pq.add(new int[]{source, 0}); 
 
-        Arrays.fill(cost, Integer.MAX_VALUE);
-        cost[sourceNode] = 0;
-        Arrays.fill(predecessor, -1);
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            int node = curr[0];
+            int currentDist = curr[1];
 
-        priorityQueue.offer(new int[]{0, sourceNode});
+            if (currentDist > dist.get(node)) continue;
 
-        while (!priorityQueue.isEmpty()) {
-            int[] current = priorityQueue.poll();
-            int currentNode = current[1];
+            // VerificA os vizinhos
+            for (int neighbor : graph.getAdj(node)) {
+                int weight = graph.getWeight(node, neighbor);
+                if (weight == Integer.MAX_VALUE) continue;
+                int newDist = currentDist + Math.abs(weight);
 
-            if (currentNode == targetNode) break;
-
-            for (int neighbor : graph.getAdjNodes(currentNode)) {
-                int totalCost = cost[currentNode] + graph.getWeight(currentNode, neighbor);
-                if (totalCost < cost[neighbor]) {
-                    cost[neighbor] = totalCost;
-                    predecessor[neighbor] = currentNode;
-                    priorityQueue.offer(new int[]{totalCost, neighbor});
+                // Se encontramos um caminho mais curto, atualizamos a distância
+                if (newDist < dist.get(neighbor)) {
+                    dist.put(neighbor, newDist);
+                    pq.add(new int[]{neighbor, newDist});
                 }
             }
         }
-        
-        return reconstructPath(predecessor, targetNode);
-    }
-
-    private List<Integer> reconstructPath(int[] predecessor, int target) {
-        List<Integer> path = new ArrayList<>();
-        while (target != -1) {
-            path.add(target);
-            target = predecessor[target];
-        }
-        Collections.reverse(path);
-        return path;
+        return dist;
     }
 
     public static void main(String[] args) {
-        AdjMatrix graph = new AdjMatrix(6, Integer.MAX_VALUE);
-        graph.addNode(0);
-        graph.addNode(1);
-        graph.addNode(2);
-        graph.addNode(3);
-        graph.addNode(4);
-        graph.addNode(5);
 
-        graph.addEdge(0, 1, 4);
-        graph.addEdge(0, 2, 2);
-        graph.addEdge(1, 2, 5);
-        graph.addEdge(1, 3, 10);
-        graph.addEdge(2, 4, 3);
-        graph.addEdge(3, 5, 6);
-        graph.addEdge(4, 3, 2);
-        graph.addEdge(4, 5, 8);
+        AdjList adjList = new AdjList(5);
+        adjList.addEdge(0, 1, 10);
+        adjList.addEdge(0, 2, 3);
+        adjList.addEdge(1, 2, 1);
+        adjList.addEdge(1, 3, 2);
+        adjList.addEdge(2, 3, 8);
+        adjList.addEdge(3, 4, 7);
 
-        Dijkstra dijkstra = new Dijkstra(graph);
-        System.out.println("Shortest path from 0 to 5: " + dijkstra.shortestPath(0, 5));
+        System.out.println("Shortest Paths from Node 0 (AdjList):");
+        Map<Integer, Integer> distAdjList = dijkstra(adjList, 0);
+        System.out.println(distAdjList);
+
+        int[][] adjMatrix = new int[5][5];
+        adjMatrix[0][1] = 10;
+        adjMatrix[0][2] = 3;
+        adjMatrix[1][2] = 1;
+        adjMatrix[1][3] = 2;
+        adjMatrix[2][3] = 8;
+        adjMatrix[3][4] = 7;
+
+        AdjMatrix matrixGraph = new AdjMatrix(5, adjMatrix);
+
+        System.out.println("Shortest Paths from Node 0 (AdjMatrix):");
+        Map<Integer, Integer> distAdjMatrix = dijkstra(matrixGraph, 0);
+        System.out.println(distAdjMatrix);
     }
 }
