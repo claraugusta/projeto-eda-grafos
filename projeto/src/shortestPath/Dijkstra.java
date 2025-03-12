@@ -4,7 +4,7 @@ import graphs.*;
 import java.util.*;
 
 public class Dijkstra {
-
+    private static final int INF = Integer.MAX_VALUE;
     public static Map<Integer, Integer> dijkstra(Graph graph, int source) {
         int n = graph.size();
         Map<Integer, Integer> dist = new HashMap<>(); 
@@ -12,7 +12,7 @@ public class Dijkstra {
 
         // Inicializa as distâncias e a fila de prioridade
         for (int i = 0; i < n; i++) {
-            dist.put(i, Integer.MAX_VALUE); 
+            dist.put(i, INF);
         }
         dist.put(source, 0);
         pq.add(new int[]{source, 0}); 
@@ -27,7 +27,7 @@ public class Dijkstra {
             // VerificA os vizinhos
             for (int neighbor : graph.getAdj(node)) {
                 int weight = graph.getWeight(node, neighbor);
-                if (weight == Integer.MAX_VALUE) continue;
+                if (weight == INF) continue;
                 int newDist = currentDist + Math.abs(weight);
 
                 // Se encontramos um caminho mais curto, atualizamos a distância
@@ -41,7 +41,6 @@ public class Dijkstra {
     }
 
     public static void main(String[] args) {
-
         AdjList adjList = new AdjList(5);
         adjList.addEdge(0, 1, 10);
         adjList.addEdge(0, 2, 3);

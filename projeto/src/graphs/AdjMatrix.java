@@ -20,10 +20,14 @@ public class AdjMatrix implements Graph{
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
         this.adjMatrix = new int[this.maxNodes][this.maxNodes];
+        for (int i = 0; i < maxNodes; i++) {
+            Arrays.fill(this.adjMatrix[i], nullEdgeValue);
+        }
     }
 
     public AdjMatrix(int maxNodes, int[][] matrix){
         this.maxNodes = maxNodes;
+        this.nullEdgeValue = Integer.MAX_VALUE;
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
         this.adjMatrix = matrix;
@@ -81,7 +85,7 @@ public class AdjMatrix implements Graph{
         int l = getNodeIndex(nodeOut);
         int c = getNodeIndex(nodeIn);
         if(l == -1 || c == -1)
-            return -1;
+            return nullEdgeValue;
         return this.adjMatrix[l][c];
     }
 

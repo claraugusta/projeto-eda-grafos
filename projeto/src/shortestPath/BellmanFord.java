@@ -37,26 +37,26 @@ public class BellmanFord {
         return dist;
     }
 
-    public static void main(String[] args) {
-        Graph adj = new AdjMatrix(9, new int[][] {
-                {INF, 4, INF, INF, INF, INF, INF, 8, INF},
-                {4, INF, 8, INF, INF, INF, INF, 11, INF},
-                {INF, 8, INF, 7, INF, INF, INF, INF, 2},
-                {INF, INF, 7, INF, 9, 14, INF, INF, INF},
-                {INF, INF, INF, 9, INF, 10, INF, INF, INF},
-                {INF, INF, 4, 14, 10, INF, 2, INF, INF},
-                {INF, INF, INF, INF, INF, 2, INF, 1, 6},
-                {8, 11, INF, INF, INF, INF, 1, INF, 7},
-                {INF, INF, 2, INF, INF, INF, 6, 7, INF}
-        });
-        for (int i = 0; i < adj.size(); i++) {
-            adj.addNode(i);
-        }
-
-        int src = 0;
-        System.out.println(adj.getWeight(0,1));
-        int[] ans = bellmanFord(adj, src, adj.size());
-        for (int dist : ans)
-            System.out.print(dist + " ");
-    }
+//    public static void main(String[] args) {
+//        Graph adj = new AdjMatrix(9, new int[][] {
+//                {INF, 4, INF, INF, INF, INF, INF, 8, INF},
+//                {4, INF, 8, INF, INF, INF, INF, 11, INF},
+//                {INF, 8, INF, 7, INF, INF, INF, INF, 2},
+//                {INF, INF, 7, INF, 9, 14, INF, INF, INF},
+//                {INF, INF, INF, 9, INF, 10, INF, INF, INF},
+//                {INF, INF, 4, 14, 10, INF, 2, INF, INF},
+//                {INF, INF, INF, INF, INF, 2, INF, 1, 6},
+//                {8, 11, INF, INF, INF, INF, 1, INF, 7},
+//                {INF, INF, 2, INF, INF, INF, 6, 7, INF}
+//        });
+//        for (int i = 0; i < adj.size(); i++) {
+//            adj.addNode(i);
+//        }
+//
+//        int src = 0;
+//        System.out.println(adj.getWeight(0,1));
+//        int[] ans = bellmanFord(adj, src, adj.size());
+//        for (int dist : ans)
+//            System.out.print(dist + " ");
+//    }
 }
