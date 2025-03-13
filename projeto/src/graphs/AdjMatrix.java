@@ -30,6 +30,9 @@ public class AdjMatrix implements Graph{
         this.nullEdgeValue = Integer.MAX_VALUE;
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
+        for (int i = 0; i < maxNodes; i++) {
+            this.nodes[i] = i;
+        }
         this.adjMatrix = matrix;
     }
 
