@@ -83,13 +83,12 @@ public class GenerateGraphs {
             System.out.println(directedGraph.MatrixToString());
         }
 
-        size = 5; // Número de vértices
-        nullEdgeValue = 0; // Valor que representa a ausência de arestas
-        density = 0.7; // Densidade do grafo (50% de chance de existir uma aresta)
-        double negativeProb = 0.4; // 20% de chance de uma aresta ter peso negativo
-        int maxWeight = 10; // Peso máximo das arestas (em módulo)
+        size = 5;
+        nullEdgeValue = 0;
+        density = 0.7;
+        double negativeProb = 0.4;
+        int maxWeight = 10;
 
-        // Gera o grafo direcionado com chances de arestas negativas
         graph = generateDirectedAdjMatrixNegativeEdges(
                 size, nullEdgeValue, density, negativeProb, maxWeight);
 
