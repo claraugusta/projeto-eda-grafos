@@ -2,6 +2,7 @@ package shortestPath;
 
 import graphs.AdjList;
 import graphs.AdjMatrix;
+import graphs.DirectedAdjMatrix;
 import graphs.Graph;
 import java.util.Map;
 
@@ -57,9 +58,13 @@ public class Johnson {
 
     public static void main(String[] args) {
         // Criando um grafo com 4 vértices
-        Graph graph = new AdjMatrix(5, INF);
+        Graph graph = new DirectedAdjMatrix(4, INF);
 
         // Adicionando arestas ao grafo com pesos
+        graph.addNode(0);
+        graph.addNode(1);
+        graph.addNode(2);
+        graph.addNode(3);
         graph.addEdge(0, 1, 3);  // Aresta de 0 para 1 com peso 3
         graph.addEdge(0, 2, 8);  // Aresta de 0 para 2 com peso 8
         graph.addEdge(0, 3, 5);  // Aresta de 0 para 3 com peso 5

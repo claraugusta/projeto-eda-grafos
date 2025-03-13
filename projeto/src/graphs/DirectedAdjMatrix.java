@@ -1,6 +1,7 @@
 package graphs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //grafo direcionado e ponderado
@@ -18,6 +19,9 @@ public class DirectedAdjMatrix implements Graph{
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
         this.adjMatrix = new int[this.maxNodes][this.maxNodes];
+        for (int i = 0; i < maxNodes; i++) {
+            Arrays.fill(this.adjMatrix[i], nullEdgeValue);
+        }
     }
 
     public int getNodeIndex(int node){
@@ -40,12 +44,12 @@ public class DirectedAdjMatrix implements Graph{
         return true;
     }
 
-    public boolean addEdge(int nodeIn, int nodeOut, int weigth){
-        int c = getNodeIndex(nodeOut);
-        int l = getNodeIndex(nodeIn);
+    public boolean addEdge(int nodeIn, int nodeOut, int weight){
+        int l = getNodeIndex(nodeOut);
+        int c = getNodeIndex(nodeIn);
         if(l == -1 || c == -1)
             return false;
-        this.adjMatrix[l][c] = weigth;
+        this.adjMatrix[l][c] = weight;
         return true;
     }
 
@@ -53,7 +57,7 @@ public class DirectedAdjMatrix implements Graph{
         int c = getNodeIndex(nodeOut);
         int l = getNodeIndex(nodeIn);
         if(l == -1 || c == -1)
-            return -1;
+            return nullEdgeValue;
         return this.adjMatrix[l][c];
     }
 
