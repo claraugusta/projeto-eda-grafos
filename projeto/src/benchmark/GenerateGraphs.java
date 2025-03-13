@@ -104,6 +104,31 @@ public class GenerateGraphs {
         return graph;
     }
 
+    public static Graph generateTreeAdjList(int size, int nullEdgeValue, int maxWeight) {
+        Graph graph = new AdjList(size);
+        for (int i = 0; i < size; i++)
+            graph.addNode(i);
+        Random rand = new Random();
+        for (int i = 1; i < size; i++) {
+            int parent = rand.nextInt(i);
+            int weight = rand.nextInt(maxWeight) + 1;
+            graph.addEdge(parent, i, weight);
+        }
+        return graph;
+    }
+
+    public static Graph generateTreeAdjList(int size, int nullEdgeValue) {
+        Graph graph = new AdjList(size);
+        for (int i = 0; i < size; i++)
+            graph.addNode(i);
+        Random rand = new Random();
+        for (int i = 1; i < size; i++) {
+            int parent = rand.nextInt(i);
+            graph.addEdge(parent, i, 1);
+        }
+        return graph;
+    }
+
     public static void main(String[] args) {
         int size = 5;
         int nullEdgeValue = 0;
