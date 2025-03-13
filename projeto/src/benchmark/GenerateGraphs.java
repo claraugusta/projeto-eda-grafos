@@ -67,16 +67,50 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static void main(String[] args) {
-        // Exemplo de uso
-        int size = 5; // Número de vértices
-        int nullEdgeValue = 0; // Valor que representa a ausência de arestas
-        double density = 0.5; // Densidade do grafo (50% de chance de existir uma aresta)
+    public static Graph generateTreeDirectedAdjMatrix(int size, int nullEdgeValue) {
+        Graph graph = new DirectedAdjMatrix(size, nullEdgeValue);
+        for (int i = 0; i < size; i++)
+            graph.addNode(i);
+        Random rand = new Random();
+        for (int i = 1; i < size; i++) {
+            int parent = rand.nextInt(i);
+            graph.addEdge(parent, i, 1);
+        }
+        return graph;
+    }
 
-        // Gera o grafo direcionado
+    public static Graph generateAdjMatrix(int size, int nullEdgeValue) {
+        Graph graph = new AdjMatrix(size, nullEdgeValue);
+        for (int i = 0; i < size; i++)
+            graph.addNode(i);
+        Random rand = new Random();
+        for (int i = 1; i < size; i++) {
+            int parent = rand.nextInt(i);
+            graph.addEdge(parent, i, 1);
+        }
+        return graph;
+    }
+
+    public static Graph generateTreeAdjMatrix(int size, int nullEdgeValue, int maxWeight) {
+        Graph graph = new AdjMatrix(size, nullEdgeValue);
+        for (int i = 0; i < size; i++)
+            graph.addNode(i);
+        Random rand = new Random();
+        for (int i = 1; i < size; i++) {
+            int parent = rand.nextInt(i);
+            int weight = rand.nextInt(maxWeight) + 1;
+            graph.addEdge(parent, i, weight);
+        }
+        return graph;
+    }
+
+    public static void main(String[] args) {
+        int size = 5;
+        int nullEdgeValue = 0;
+        double density = 0.5;
+
         Graph graph = generateDirectedAdjMatrix(size, nullEdgeValue, density);
 
-        // Exibe a matriz de adjacência
         if (graph instanceof DirectedAdjMatrix) {
             DirectedAdjMatrix directedGraph = (DirectedAdjMatrix) graph;
             System.out.println("Matriz de Adjacência do Grafo Direcionado:");
@@ -92,11 +126,18 @@ public class GenerateGraphs {
         graph = generateDirectedAdjMatrixNegativeEdges(
                 size, nullEdgeValue, density, negativeProb, maxWeight);
 
-        // Exibe a matriz de adjacência
         if (graph instanceof DirectedAdjMatrix) {
             DirectedAdjMatrix directedGraph = (DirectedAdjMatrix) graph;
             System.out.println("Matriz de Adjacência do Grafo Direcionado com Arestas Negativas:");
             System.out.println(directedGraph.MatrixToString());
+        }
+
+        Graph tree = generateTreeAdjMatrix(size, nullEdgeValue, maxWeight);
+
+        if (tree instanceof AdjMatrix) {
+            AdjMatrix tree1 = (AdjMatrix) tree;
+            System.out.println("Matriz de Adjacência da Árvore:");
+            System.out.println(tree1.MatrixToString());
         }
     }
 }
