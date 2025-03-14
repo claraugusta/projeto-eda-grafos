@@ -1,0 +1,227 @@
+Grafos com arestas negativas
+Size: 5, Density: 0.1, NegProb: 0.1
+(Bellman-Ford) Time: 3.3560166666666675 ms, Memory: 282 KB
+(Johnson) Time: 10.369636666666674 ms, Memory: 1134 KB
+
+Size: 5, Density: 0.1, NegProb: 0.3
+(Bellman-Ford) Time: 0.04878 ms, Memory: 79 KB
+(Johnson) Time: 0.06184999999999999 ms, Memory: 79 KB
+
+Size: 5, Density: 0.1, NegProb: 0.6
+(Bellman-Ford) Time: 0.015963333333333333 ms, Memory: 79 KB
+(Johnson) Time: 0.09535 ms, Memory: 79 KB
+
+Size: 5, Density: 0.3, NegProb: 0.1
+(Bellman-Ford) Time: 0.01623333333333333 ms, Memory: 79 KB
+(Johnson) Time: 0.09076999999999999 ms, Memory: 79 KB
+
+Size: 5, Density: 0.3, NegProb: 0.3
+(Bellman-Ford) Time: 0.03266666666666667 ms, Memory: 79 KB
+(Johnson) Time: 0.041723333333333334 ms, Memory: 79 KB
+
+Size: 5, Density: 0.3, NegProb: 0.6
+(Bellman-Ford) Time: 0.03994333333333334 ms, Memory: 79 KB
+(Johnson) Time: 0.050243333333333334 ms, Memory: 79 KB
+
+Size: 5, Density: 0.5, NegProb: 0.1
+(Bellman-Ford) Time: 0.01583666666666667 ms, Memory: 79 KB
+(Johnson) Time: 0.08325999999999999 ms, Memory: 79 KB
+
+Size: 5, Density: 0.5, NegProb: 0.3
+(Bellman-Ford) Time: 0.03903666666666667 ms, Memory: 79 KB
+(Johnson) Time: 0.05089666666666667 ms, Memory: 79 KB
+
+Size: 5, Density: 0.5, NegProb: 0.6
+(Bellman-Ford) Time: 0.04063666666666667 ms, Memory: 79 KB
+(Johnson) Time: 0.07265333333333332 ms, Memory: 79 KB
+
+Size: 5, Density: 0.7, NegProb: 0.1
+(Bellman-Ford) Time: 0.03395999999999999 ms, Memory: 79 KB
+(Johnson) Time: 0.04726333333333333 ms, Memory: 79 KB
+
+Size: 5, Density: 0.7, NegProb: 0.3
+(Bellman-Ford) Time: 0.03814666666666666 ms, Memory: 79 KB
+(Johnson) Time: 0.06279333333333334 ms, Memory: 79 KB
+
+Size: 5, Density: 0.7, NegProb: 0.6
+(Bellman-Ford) Time: 0.05380666666666666 ms, Memory: 79 KB
+(Johnson) Time: 0.06620666666666666 ms, Memory: 79 KB
+
+Size: 10, Density: 0.1, NegProb: 0.1
+(Bellman-Ford) Time: 0.05522666666666666 ms, Memory: 79 KB
+(Johnson) Time: 0.07780000000000002 ms, Memory: 79 KB
+
+Size: 10, Density: 0.1, NegProb: 0.3
+(Bellman-Ford) Time: 0.04595333333333333 ms, Memory: 79 KB
+(Johnson) Time: 0.061963333333333336 ms, Memory: 79 KB
+
+Size: 10, Density: 0.1, NegProb: 0.6
+(Bellman-Ford) Time: 0.04413666666666667 ms, Memory: 79 KB
+(Johnson) Time: 0.06144 ms, Memory: 79 KB
+
+Size: 10, Density: 0.3, NegProb: 0.1
+(Bellman-Ford) Time: 0.04227 ms, Memory: 79 KB
+(Johnson) Time: 0.053320000000000006 ms, Memory: 79 KB
+
+Size: 10, Density: 0.3, NegProb: 0.3
+(Bellman-Ford) Time: 0.04251333333333334 ms, Memory: 79 KB
+(Johnson) Time: 0.05376333333333334 ms, Memory: 79 KB
+
+Size: 10, Density: 0.3, NegProb: 0.6
+(Bellman-Ford) Time: 0.04094666666666668 ms, Memory: 79 KB
+(Johnson) Time: 0.05372333333333334 ms, Memory: 79 KB
+
+Size: 10, Density: 0.5, NegProb: 0.1
+(Bellman-Ford) Time: 0.04132666666666666 ms, Memory: 79 KB
+(Johnson) Time: 0.05339333333333334 ms, Memory: 79 KB
+
+Size: 10, Density: 0.5, NegProb: 0.3
+(Bellman-Ford) Time: 0.04482 ms, Memory: 79 KB
+(Johnson) Time: 0.057856666666666653 ms, Memory: 79 KB
+
+Size: 10, Density: 0.5, NegProb: 0.6
+(Bellman-Ford) Time: 0.04289666666666667 ms, Memory: 79 KB
+(Johnson) Time: 0.05358666666666668 ms, Memory: 79 KB
+
+Size: 10, Density: 0.7, NegProb: 0.1
+(Bellman-Ford) Time: 0.04574333333333333 ms, Memory: 79 KB
+(Johnson) Time: 0.05993333333333335 ms, Memory: 79 KB
+
+Size: 10, Density: 0.7, NegProb: 0.3
+(Bellman-Ford) Time: 0.048113333333333334 ms, Memory: 79 KB
+(Johnson) Time: 0.05998333333333334 ms, Memory: 79 KB
+
+Size: 10, Density: 0.7, NegProb: 0.6
+(Bellman-Ford) Time: 0.049053333333333324 ms, Memory: 79 KB
+(Johnson) Time: 0.06096666666666668 ms, Memory: 79 KB
+
+Size: 100, Density: 0.1, NegProb: 0.1
+(Bellman-Ford) Time: 76.88388333333334 ms, Memory: 79 KB
+(Johnson) Time: 95.52189 ms, Memory: 79 KB
+
+Size: 100, Density: 0.1, NegProb: 0.3
+(Bellman-Ford) Time: 76.10298333333331 ms, Memory: 79 KB
+(Johnson) Time: 94.34696333333333 ms, Memory: 79 KB
+
+Size: 100, Density: 0.1, NegProb: 0.6
+(Bellman-Ford) Time: 77.60365666666667 ms, Memory: 79 KB
+(Johnson) Time: 96.28308333333331 ms, Memory: 79 KB
+
+Size: 100, Density: 0.3, NegProb: 0.1
+(Bellman-Ford) Time: 77.80564 ms, Memory: 79 KB
+(Johnson) Time: 96.24688666666671 ms, Memory: 79 KB
+
+Size: 100, Density: 0.3, NegProb: 0.3
+(Bellman-Ford) Time: 77.10148666666666 ms, Memory: 79 KB
+(Johnson) Time: 96.38377666666665 ms, Memory: 79 KB
+
+Size: 100, Density: 0.3, NegProb: 0.6
+(Bellman-Ford) Time: 79.56953666666665 ms, Memory: 79 KB
+(Johnson) Time: 98.06865666666666 ms, Memory: 79 KB
+
+Size: 100, Density: 0.5, NegProb: 0.1
+(Bellman-Ford) Time: 76.62332666666666 ms, Memory: 79 KB
+(Johnson) Time: 95.87036666666667 ms, Memory: 79 KB
+
+Size: 100, Density: 0.5, NegProb: 0.3
+(Bellman-Ford) Time: 77.68955666666669 ms, Memory: 79 KB
+(Johnson) Time: 95.28428666666669 ms, Memory: 79 KB
+
+Size: 100, Density: 0.5, NegProb: 0.6
+(Bellman-Ford) Time: 81.12345666666667 ms, Memory: 79 KB
+(Johnson) Time: 99.01563000000002 ms, Memory: 79 KB
+
+Size: 100, Density: 0.7, NegProb: 0.1
+(Bellman-Ford) Time: 76.72358666666668 ms, Memory: 79 KB
+(Johnson) Time: 94.06507666666666 ms, Memory: 79 KB
+
+Size: 100, Density: 0.7, NegProb: 0.3
+(Bellman-Ford) Time: 80.94738666666669 ms, Memory: 79 KB
+(Johnson) Time: 94.96797666666666 ms, Memory: 79 KB
+
+Size: 100, Density: 0.7, NegProb: 0.6
+(Bellman-Ford) Time: 83.5716233333333 ms, Memory: 79 KB
+(Johnson) Time: 103.64921 ms, Memory: 79 KB
+
+Compara??o entre Matriz e Lista de Adjac?ncia
+Size: 5, Density: 0.5, NegProb: 0.0
+(Bellman-Ford) Time: 0.019143333333333328 ms, Memory: 64 KB
+(Dijkstra) Time: 0.04586333333333333 ms, Memory: 64 KB
+(Johnson) Time: 0.13752999999999999 ms, Memory: 64 KB
+
+Size: 5, Density: 0.5, NegProb: 0.0
+(Bellman-Ford) Time: 0.017566666666666668 ms, Memory: 64 KB
+(Dijkstra) Time: 0.0508 ms, Memory: 64 KB
+(Johnson) Time: 0.33224333333333345 ms, Memory: 64 KB
+
+Size: 10, Density: 0.5, NegProb: 0.0
+(Bellman-Ford) Time: 0.02824 ms, Memory: 64 KB
+(Dijkstra) Time: 0.05823666666666665 ms, Memory: 64 KB
+(Johnson) Time: 0.22139333333333341 ms, Memory: 64 KB
+
+Size: 10, Density: 0.5, NegProb: 0.0
+(Bellman-Ford) Time: 0.028636666666666664 ms, Memory: 64 KB
+(Dijkstra) Time: 0.07459333333333334 ms, Memory: 64 KB
+(Johnson) Time: 1.8406566666666666 ms, Memory: 192 KB
+
+Size: 100, Density: 0.5, NegProb: 0.0
+(Bellman-Ford) Time: 3.855933333333334 ms, Memory: 383 KB
+(Dijkstra) Time: 0.6325866666666666 ms, Memory: 151 KB
+(Johnson) Time: 65.24904333333332 ms, Memory: 1376 KB
+
+Size: 100, Density: 0.5, NegProb: 0.0
+(Bellman-Ford) Time: 0.21033333333333332 ms, Memory: 995 KB
+(Dijkstra) Time: 0.04971000000000001 ms, Memory: 162 KB
+(Johnson) Time: 1015.9980800000001 ms, Memory: 24614 KB
+
+Teste: Grafo Completamente Conectado
+Size: 5, Density: 1.0, NegProb: 0.0
+(Bellman-Ford) Time: 0.013130000000000001 ms, Memory: 191 KB
+(Dijkstra) Time: 0.020686666666666666 ms, Memory: 165 KB
+(Johnson) Time: 0.03847333333333334 ms, Memory: 163 KB
+
+Size: 10, Density: 1.0, NegProb: 0.0
+(Bellman-Ford) Time: 0.02220666666666666 ms, Memory: 163 KB
+(Dijkstra) Time: 0.02562666666666667 ms, Memory: 163 KB
+(Johnson) Time: 0.07919999999999999 ms, Memory: 163 KB
+
+Size: 100, Density: 1.0, NegProb: 0.0
+(Bellman-Ford) Time: 2.8463866666666666 ms, Memory: 507 KB
+(Dijkstra) Time: 0.6625566666666668 ms, Memory: 163 KB
+(Johnson) Time: 68.52084999999998 ms, Memory: 1358 KB
+
+Teste: Grafo com Componentes Desconexos
+Size: 5, Density: 0.05, NegProb: 0.0
+(Bellman-Ford) Time: 0.013979999999999998 ms, Memory: 191 KB
+(Dijkstra) Time: 0.017400000000000002 ms, Memory: 165 KB
+(Johnson) Time: 0.02835333333333333 ms, Memory: 163 KB
+
+Size: 10, Density: 0.05, NegProb: 0.0
+(Bellman-Ford) Time: 0.017006666666666666 ms, Memory: 163 KB
+(Dijkstra) Time: 0.019163333333333334 ms, Memory: 163 KB
+(Johnson) Time: 0.04265333333333334 ms, Memory: 163 KB
+
+Size: 100, Density: 0.05, NegProb: 0.0
+(Bellman-Ford) Time: 4.241059999999999 ms, Memory: 163 KB
+(Dijkstra) Time: 0.11861666666666666 ms, Memory: 163 KB
+(Johnson) Time: 12.951693333333335 ms, Memory: 1960 KB
+
+Teste: Grafo Direcionado Denso com Arestas Negativas
+Size: 5, Density: 0.9, NegProb: 0.5
+(Bellman-Ford) Time: 0.03093 ms, Memory: 163 KB
+(Johnson) Time: 0.033223333333333334 ms, Memory: 163 KB
+
+Size: 10, Density: 0.9, NegProb: 0.5
+(Bellman-Ford) Time: 0.047713333333333344 ms, Memory: 163 KB
+(Johnson) Time: 0.05209333333333332 ms, Memory: 163 KB
+
+Size: 100, Density: 0.9, NegProb: 0.5
+(Bellman-Ford) Time: 94.18856333333333 ms, Memory: 163 KB
+(Johnson) Time: 67.92145333333333 ms, Memory: 163 KB
+
+Teste: Grafo Muito Grande e Esparso
+Size: 500, Density: 0.01, NegProb: 0.0
+(Bellman-Ford) Time: 695.9102033333335 ms, Memory: 936 KB
+(Dijkstra) Time: 1.3779299999999997 ms, Memory: 173 KB
+(Johnson) Time: 1093.2184333333332 ms, Memory: 46550 KB
+
