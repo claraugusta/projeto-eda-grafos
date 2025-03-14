@@ -6,7 +6,6 @@ import searchAlgorithms.Bfs;
 import searchAlgorithms.Dfs;
 
 public class BfsDfsBenchmark {
-    
     private static int REPETITIONS = 30;
 
     private static long getMemoryUsage() {
@@ -37,6 +36,7 @@ public class BfsDfsBenchmark {
             long startTimeBfs = System.nanoTime();
             bfs.bfsTarget(graph, startNode, targetNode);
             long endTimeBfs = System.nanoTime();
+
             long afterMemoryBfs = getMemoryUsage();
 
             totalTimeBfs += (endTimeBfs - startTimeBfs) / 1e6;
