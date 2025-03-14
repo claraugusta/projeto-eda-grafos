@@ -58,11 +58,6 @@ public class Johnson {
                     dist.put(v, dist.get(v) - h[u] + h[v]);
                 }
             }
-
-//            System.out.println("Distâncias a partir do vértice " + u + ":");
-//            for (int v = 0; v < V - 1; v++) {
-//                System.out.println("Para " + v + ": " + (dist.get(v) == INF ? "INF" : dist.get(v)));
-//            }
         }
     }
 

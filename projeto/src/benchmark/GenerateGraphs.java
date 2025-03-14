@@ -19,6 +19,23 @@ public class GenerateGraphs {
         return graph;
     }
 
+    public AdjListWeighted generateAdjListWeighted(int size, int nullEdgeValue, double density,
+                                                   double negativeProb, int maxWeight) {
+        AdjListWeighted graph = new AdjListWeighted(size);
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i != j && rand.nextDouble() < density) {
+                    int weight = rand.nextInt(maxWeight) + 1;
+                    if (rand.nextDouble() < negativeProb)
+                        weight = -weight;
+                    graph.addEdge(i, j, weight);
+                }
+            }
+        }
+        return graph;
+    }
+
     public  Graph generateAdjMatrix(int size, int nullEdgeValue, double density){
         Graph graph = new AdjMatrix(size, nullEdgeValue);
         Random rand = new Random();

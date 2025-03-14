@@ -1,5 +1,6 @@
 package shortestPath;
 
+import graphs.AdjListWeighted;
 import graphs.AdjMatrix;
 import graphs.Graph;
 import java.util.Arrays;
@@ -46,39 +47,54 @@ public class BellmanFord {
         return distances;
     }
 
+    public static int[] bellmanFord(AdjListWeighted graph, int src) {
+        int V = graph.size();
+        int[] dist = new int[V];
+        Arrays.fill(dist, INF);
+        dist[src] = 0;
+
+        for (int i = 0; i < V - 1; i++) {
+            for (int u = 0; u < V; u++) {
+                for (AdjListWeighted.Edge edge : graph.getAdj(u)) {
+                    if (dist[edge.nodeIn] != INF && dist[edge.nodeIn] + edge.weight < dist[edge.nodeOut]) {
+                        dist[edge.nodeOut] = dist[edge.nodeIn] + edge.weight;
+                    }
+                }
+            }
+
+        }
+        for (int i = 0; i < V; i++) {
+            for (AdjListWeighted.Edge edge : graph.getAdj(i)) {
+                if (dist[edge.nodeIn] != INF && dist[edge.nodeIn] + edge.weight < dist[edge.nodeOut]) {
+                    throw new IllegalStateException("Ciclo negativo detectado");
+                }
+            }
+        }
+        return dist;
+    }
+
+
     public static void main(String[] args) {
-        Graph adj = new AdjMatrix(5, new int[][]  {
-                {0, -5, 2, 3},
-                {0, 0, 4, 0},
-                {0, 0, 0, 1},
-                {0, 0, 0, 0}
-        });
+        AdjListWeighted graph = new AdjListWeighted(5);
+        graph.addEdge(0, 1, -1);
+        graph.addEdge(0, 2, 4);
+        graph.addEdge(1, 2, 3);
+        graph.addEdge(1, 3, 2);
+        graph.addEdge(1, 4, 2);
+        graph.addEdge(3, 2, 5);
+        graph.addEdge(3, 1, 1);
+        graph.addEdge(4, 3, -3);
 
-        Graph graph1 = new AdjMatrix(4, new int[][] {
-                {0, 4, 2, INF},  // Arestas do vértice 0
-                {INF, 0, 5, INF}, // Arestas do vértice 1
-                {INF, INF, 0, 3}, // Arestas do vértice 2
-                {INF, INF, INF, 0} // Arestas do vértice 3
-        });
-
-
-        Graph graph2 = new AdjMatrix(4, new int[][] {
-                {0, 1, INF, INF},  // Arestas do vértice 0
-                {INF, 0, -1, INF},  // Arestas do vértice 1
-                {INF, INF, 0, -2},  // Arestas do vértice 2
-                {1, INF, INF, 0}    // Arestas do vértice 3
-        });
-
-        Graph graph3 = new AdjMatrix(5, new int[][] {
-                {0, 6, INF, 7, INF},  // Arestas do vértice 0
-                {INF, 0, 5, 8, -4},   // Arestas do vértice 1
-                {INF, -2, 0, INF, INF}, // Arestas do vértice 2
-                {INF, INF, -3, 0, 9},  // Arestas do vértice 3
-                {2, INF, INF, INF, 0}  // Arestas do vértice 4
-        });
-        int src = 0;
-        int[] ans = bellmanFord(graph3, src, graph3.size());
-        for (int dist : ans)
-            System.out.print(dist + " ");
+        System.out.println(Arrays.toString(bellmanFord(graph, 0)));
+        int[][] graph1 = {
+                {  0,  -1,   4,  INF, INF },
+                { INF,   0,   3,   2,   2 },
+                { INF, INF,   0, INF, INF },
+                { INF,   1,   5,   0, INF },
+                { INF, INF, INF,  -3,   0 }
+        };
+        Graph adjmtx = new AdjMatrix(5, graph1);
+        int[] ans = bellmanFord(adjmtx, 0, adjmtx.size());
+        System.out.println(Arrays.toString(ans));
     }
 }
