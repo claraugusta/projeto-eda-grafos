@@ -1,5 +1,7 @@
 package benchmark;
 
+import graphs.AdjListWeighted;
+import graphs.AdjMatrix;
 import graphs.Graph;
 import static shortestPath.BellmanFord.bellmanFord;
 import static shortestPath.Dijkstra.dijkstra;
@@ -16,11 +18,11 @@ public class ShortestPathBenchmark {
         double[] densities = {0.1, 0.3, 0.5, 0.7};
         double[] negativeEdgeProbs = {0.1, 0.3, 0.6};
 
-        System.out.println("Grafos com arestas negativas");
+        System.out.println("Teste: Grafos com arestas negativas");
         for (int size : sizes) {
             for (double density : densities) {
                 for (double negProb : negativeEdgeProbs) {
-                    Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
+                    Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
                     runBenchmarkNegativeEdges(size, density, negProb, randGraph);
                 }
             }
@@ -31,9 +33,18 @@ public class ShortestPathBenchmark {
         for (int size : sizes) {
             double density = 0.5;
             Graph matrixGraph = g.generateAdjMatrix(size, INF, density);
-            Graph listGraph = g.generateTreeAdjList(size, INF, 20);
+            Graph listGraph = g.generateTreeAdjList(size, INF, 50);
             runBenchmark(size, density, 0, matrixGraph);
             runBenchmark(size, density, 0, listGraph);
+        }
+
+        System.out.println("Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência");
+        for(int size : sizes){
+            double density = 0.5;
+            double negProb = 0.2;
+            Graph adjMatrix = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
+            AdjListWeighted adjListWeighted = g.generateAdjListWeighted(size, INF, density, negProb, 50);
+            runBenchmarkBellman(size, density, negProb, adjMatrix, adjListWeighted);
         }
 
         // Teste: Grafo Completamente Conectado
@@ -166,6 +177,52 @@ public class ShortestPathBenchmark {
         System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
         System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
         System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
+        System.out.println();
+    }
+
+    public static void runBenchmarkBellman(int size, double density, double negProb, Graph adjMatrix, AdjListWeighted adjList) {
+        double totalTimeAdjMatrix = 0;
+        double totalTimeAdjList = 0;
+        long totalMemoryAdjMatrix = 0;
+        long totalMemoryAdjList = 0;
+
+        for (int j = 0; j < 30; j++) {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.gc();
+            long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeAdjMatrix = System.nanoTime();
+            try {
+                bellmanFord(adjMatrix, 0, adjMatrix.numberOfNodes());
+            } catch (Exception e) {
+            }
+            long endTimeAdjMatrix = System.nanoTime();
+            long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryAdjMatrix += (memoryAfter - memoryBefore) / 1024;
+            totalTimeAdjMatrix += (endTimeAdjMatrix - startTimeAdjMatrix) / 1e6;
+
+            runtime.gc();
+            memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeAdjList = System.nanoTime();
+            try {
+                bellmanFord(adjList, 0);
+            } catch (Exception e) {
+            }
+            long endTimeAdjList = System.nanoTime();
+            memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryAdjList += (memoryAfter - memoryBefore) / 1024;
+            totalTimeAdjList += (endTimeAdjList - startTimeAdjList) / 1e6;
+        }
+
+        totalTimeAdjMatrix /= 30.0;
+        totalTimeAdjList /= 30.0;
+        totalMemoryAdjMatrix /= 30.0;
+        totalMemoryAdjList /= 30.0;
+
+        System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
+        System.out.println("(Bellman-Ford: Adjacency Matrix) Time: " + totalTimeAdjMatrix + " ms, Memory: " + totalMemoryAdjMatrix + " KB");
+        System.out.println("(Bellman-Ford: Adjacency List) Time: " + totalTimeAdjList + " ms, Memory: " + totalMemoryAdjList + " KB");
         System.out.println();
     }
 }
