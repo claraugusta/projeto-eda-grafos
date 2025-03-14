@@ -7,7 +7,9 @@ import searchAlgorithms.Dfs;
 
 public class BfsDfsBenchmark {
     private static Random rand = new Random();
+
     private static int REPETITIONS = 30;
+
 
     public static Graph generateGridGraph(int rows, int cols) {
         int size = rows * cols;
@@ -24,7 +26,9 @@ public class BfsDfsBenchmark {
     }
 
     public static Graph generateDeepTreeGraph(int depth) {
+
         int size = depth * 2 - 1;
+
         Graph graph = new AdjList(size);
 
         for (int i = 0; i < depth - 1; i++) {
@@ -52,6 +56,7 @@ public class BfsDfsBenchmark {
 
     private static long getMemoryUsage() {
         Runtime runtime = Runtime.getRuntime();
+
         return (runtime.totalMemory() - runtime.freeMemory()) / (1024);
     }
 
@@ -67,16 +72,20 @@ public class BfsDfsBenchmark {
             dfs.dfsTarget(graph, startNode, targetNode);
             long endTimeDfs = System.nanoTime();
             long endMemoryDfs = getMemoryUsage();
+
             totalTimeDfs += (endTimeDfs - startTimeDfs) / 1e6;
             totalMemoryDfs += (endMemoryDfs - startMemoryDfs);
+
 
             long startMemoryBfs = getMemoryUsage();
             long startTimeBfs = System.nanoTime();
             bfs.bfsTarget(graph, startNode, targetNode);
             long endTimeBfs = System.nanoTime();
             long endMemoryBfs = getMemoryUsage();
+
             totalTimeBfs += (endTimeBfs - startTimeBfs) / 1e6;
             totalMemoryBfs += (endMemoryBfs - startMemoryBfs);
+
         }
 
         double avgTimeBfs = totalTimeBfs / REPETITIONS;

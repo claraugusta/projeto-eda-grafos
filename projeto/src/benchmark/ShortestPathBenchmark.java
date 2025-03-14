@@ -64,7 +64,6 @@ public class ShortestPathBenchmark {
             double density = 0.01;
             Graph graph = g.generateAdjMatrix(size, INF, density);
             runBenchmark(size, density, 0, graph);
-
     }
 
     private static void runBenchmark(int size, double density, double negProb, Graph graph) {
