@@ -1,4 +1,4 @@
-package projeto.src.test;
+package test;
 
 import graphs.AdjList;
 import org.junit.Test;
