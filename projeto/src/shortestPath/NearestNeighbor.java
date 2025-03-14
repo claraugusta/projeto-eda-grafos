@@ -4,13 +4,13 @@ import graphs.AdjMatrix;
 import graphs.Graph;
 
 public class NearestNeighbor {
-    private static final int INF = Integer.MAX_VALUE;  
+    private static final int INF = Integer.MAX_VALUE;
 
     public static int[] nearestNeighbor(Graph graph, int start) {
         int V = graph.size();
-        int[] tour = new int[V];  
+        int[] tour = new int[V];
         boolean[] visited = new boolean[V];
-        int currentNode = start;  
+        int currentNode = start;
         int tourIndex = 0;
 
         tour[tourIndex++] = currentNode;
@@ -33,9 +33,9 @@ public class NearestNeighbor {
             }
             currentNode = nearestNode;
             visited[currentNode] = true;
-            tour[tourIndex++] = currentNode;  
+            tour[tourIndex++] = currentNode;
         }
-        return tour;  
+        return tour;
     }
 
     public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class NearestNeighbor {
         // graph.addEdge(2, 4, 5);
         // graph.addEdge(3, 4, 4);
 
-        int start = 0;  
+        int start = 0;
         int[] tour = nearestNeighbor(graph, start);
 
         System.out.println("Caminho encontrado: ");
