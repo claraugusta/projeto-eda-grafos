@@ -178,7 +178,7 @@ public class GenerateGraphs {
         if (tree instanceof AdjMatrix) {
             AdjMatrix tree1 = (AdjMatrix) tree;
             System.out.println("Matriz de Adjacência da Árvore:");
-            System.out.println(tree1.MatrixToString());
+//            System.out.println(tree1.MatrixToString());
         }
     }
 }
