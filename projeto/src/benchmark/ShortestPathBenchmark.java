@@ -1,7 +1,6 @@
 package benchmark;
 
 import graphs.Graph;
-
 import static shortestPath.BellmanFord.bellmanFord;
 import static shortestPath.Dijkstra.dijkstra;
 import static shortestPath.Johnson.johnson;
@@ -12,11 +11,11 @@ public class ShortestPathBenchmark {
     private static final GenerateGraphs g = new GenerateGraphs();
 
 
-
     public static void main(String[] args) {
         int[] sizes = {5, 10, 100};
         double[] densities = {0.1, 0.3, 0.5, 0.7};
         double[] negativeEdgeProbs = {0.1, 0.3, 0.6};
+
         System.out.println("Grafos com arestas negativas");
         for (int size : sizes) {
             for (double density : densities) {

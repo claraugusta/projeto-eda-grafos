@@ -34,7 +34,6 @@ public class Johnson {
         try {
             h = bellmanFord(expandedGraph, s, V);
         } catch (IllegalStateException e) {
-//            System.out.println("Erro: " + e.getMessage());
             return;
         }
 
