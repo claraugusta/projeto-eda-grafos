@@ -1,5 +1,3 @@
-package testes;
-
 import graphs.AdjList;
 import org.junit.Before;
 import org.junit.Test;

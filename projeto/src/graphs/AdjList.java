@@ -21,8 +21,9 @@ public class AdjList implements Graph{
 
     @Override
     public boolean addNode(int node) {
-        if (!adjList.contains(node)) {
+        if (node >= this.nodes) {
             adjList.add(node, new ArrayList<>());
+            this.nodes++;
             return true;
         }
         return false;
