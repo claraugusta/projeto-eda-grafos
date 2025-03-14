@@ -1,262 +1,171 @@
 package benchmark;
 
-import graphs.*;
-import shortestPath.*;
-
-import java.util.Random;
+import graphs.Graph;
+import static shortestPath.BellmanFord.bellmanFord;
+import static shortestPath.Dijkstra.dijkstra;
+import static shortestPath.Johnson.johnson;
 
 public class ShortestPathBenchmark {
 
     private static final int INF = Integer.MAX_VALUE;
+    private static final GenerateGraphs g = new GenerateGraphs();
+
 
     public static void main(String[] args) {
-
-        GenerateGraphs g = new GenerateGraphs();
-        BellmanFord b = new BellmanFord();
-        Dijkstra d = new Dijkstra();
-
         int[] sizes = {5, 10, 100};
         double[] densities = {0.1, 0.3, 0.5, 0.7};
         double[] negativeEdgeProbs = {0.1, 0.3, 0.6};
 
-        Random rand = new Random();
-        for (int i : sizes) {
-
-            double totalTimeBellmanFord = 0;
-            double totalTimeDijkstra = 0;
-
-            for (int j = 0; j < 30; j++) {
-                int busca = rand.nextInt(i - 1);
-                Graph randGraph = g.generateAdjMatrixWeight(i, INF, 0.1, 20);
-
-                long startTimeBellmanFord = System.nanoTime();
-                b.bellmanFord(randGraph, 0, randGraph.numberOfNodes());
-                long endTime = System.nanoTime();
-                totalTimeBellmanFord += (endTime - startTimeBellmanFord) / 1e6;
-
-                long startTimeDijkstra = System.nanoTime();
-                d.dijkstra(randGraph, 0);
-                long endTimeDijkstra = System.nanoTime();
-                totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
-            }
-            totalTimeBellmanFord = totalTimeBellmanFord / 30.0;
-            totalTimeDijkstra = totalTimeDijkstra / 30.0;
-            System.out.println("(BellmanFord) size:" + i + " time: " + totalTimeBellmanFord + " ms");
-            System.out.println("(Dijkstra) size:" + i + " time: " + totalTimeDijkstra + " ms");
-            System.out.println();
-        }
-
-        // NOVOS TESTES
+        System.out.println("Grafos com arestas negativas");
         for (int size : sizes) {
             for (double density : densities) {
                 for (double negProb : negativeEdgeProbs) {
-
-                    double totalTimeBellmanFord = 0;
-                    double totalTimeDijkstra = 0;
-                    long totalMemoryBellmanFord = 0;
-                    long totalMemoryDijkstra = 0;
-
-                    for (int j = 0; j < 30; j++) {
-                        int busca = rand.nextInt(size - 1);
-
-                        Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
-
-                        // Medindo uso de memória antes
-                        Runtime runtime = Runtime.getRuntime();
-                        runtime.gc();
-                        long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
-
-                        long startTimeBellmanFord = System.nanoTime();
-                        b.bellmanFord(randGraph, 0, randGraph.numberOfNodes());
-                        long endTime = System.nanoTime();
-
-                        // Memória após a execução
-                        long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
-                        totalMemoryBellmanFord += (memoryAfter - memoryBefore) / 1024;
-
-                        totalTimeBellmanFord += (endTime - startTimeBellmanFord) / 1e6;
-
-                        // Medindo uso de memória para Dijkstra
-                        runtime.gc();
-                        memoryBefore = runtime.totalMemory() - runtime.freeMemory();
-
-                        long startTimeDijkstra = System.nanoTime();
-                        d.dijkstra(randGraph, 0);
-                        long endTimeDijkstra = System.nanoTime();
-
-                        memoryAfter = runtime.totalMemory() - runtime.freeMemory();
-                        totalMemoryDijkstra += (memoryAfter - memoryBefore) / 1024;
-
-                        totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
-                    }
-
-                    totalTimeBellmanFord /= 30.0;
-                    totalTimeDijkstra /= 30.0;
-                    totalMemoryBellmanFord /= 30.0;
-                    totalMemoryDijkstra /= 30.0;
-
-                    System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
-                    System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
-                    System.out.println("(Dijkstra) Time: " + totalTimeDijkstra + " ms, Memory: " + totalMemoryDijkstra + " KB");
-                    System.out.println();
+                    Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
+                    runBenchmarkNegativeEdges(size, density, negProb, randGraph);
                 }
             }
         }
 
-        // Testando a diferença entre matriz de adjacência e lista de adjacência
+        // Comparação entre matriz e lista de adjacência
         System.out.println("Comparação entre Matriz e Lista de Adjacência");
-
         for (int size : sizes) {
-            double density = 0.5;  // Mantemos a densidade fixa para essa comparação
-
-            double totalTimeMatrix = 0;
-            double totalTimeList = 0;
-
-            for (int j = 0; j < 30; j++) {
-                Graph matrixGraph = g.generateAdjMatrix(size, INF, density);
-                Graph listGraph = g.generateTreeAdjList(size, INF, 20);
-
-                long startMatrix = System.nanoTime();
-                d.dijkstra(matrixGraph, 0);
-                long endMatrix = System.nanoTime();
-                totalTimeMatrix += (endMatrix - startMatrix) / 1e6;
-
-                long startList = System.nanoTime();
-                d.dijkstra(listGraph, 0);
-                long endList = System.nanoTime();
-                totalTimeList += (endList - startList) / 1e6;
-            }
-
-            totalTimeMatrix /= 30.0;
-            totalTimeList /= 30.0;
-
-            System.out.println("Size: " + size);
-            System.out.println("(AdjMatrix) Dijkstra Time: " + totalTimeMatrix + " ms");
-            System.out.println("(AdjList) Dijkstra Time: " + totalTimeList + " ms");
-            System.out.println();
+            double density = 0.5;
+            Graph matrixGraph = g.generateAdjMatrix(size, INF, density);
+            Graph listGraph = g.generateTreeAdjList(size, INF, 20);
+            runBenchmark(size, density, 0, matrixGraph);
+            runBenchmark(size, density, 0, listGraph);
         }
-
-        // Teste: Grafo de Grade (Grid)
-        System.out.println("Teste: Grafo em Forma de Grade (Grid)");
-        for (int size : sizes) {
-            double totalTimeBellmanFord = 0;
-            double totalTimeDijkstra = 0;
-
-            for (int j = 0; j < 30; j++) {
-                Graph gridGraph = g.generateAdjMatrix(size * size, INF, 4.0 / (size * size)); // Aproximadamente 4 conexões por nó
-
-                long startTimeBF = System.nanoTime();
-                b.bellmanFord(gridGraph, 0, gridGraph.numberOfNodes());
-                long endTimeBF = System.nanoTime();
-                totalTimeBellmanFord += (endTimeBF - startTimeBF) / 1e6;
-
-                long startTimeDijkstra = System.nanoTime();
-                d.dijkstra(gridGraph, 0);
-                long endTimeDijkstra = System.nanoTime();
-                totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
-            }
-
-            System.out.println("Size: " + size + "x" + size + " | Bellman-Ford: " + (totalTimeBellmanFord / 30.0) + " ms | Dijkstra: " + (totalTimeDijkstra / 30.0) + " ms");
-        }
-        System.out.println();
 
         // Teste: Grafo Completamente Conectado
         System.out.println("Teste: Grafo Completamente Conectado");
         for (int size : sizes) {
-            double totalTimeBellmanFord = 0;
-            double totalTimeDijkstra = 0;
-
-            for (int j = 0; j < 30; j++) {
-                Graph completeGraph = g.generateAdjMatrix(size, INF, 1.0); // 100% de conectividade
-
-                long startTimeBF = System.nanoTime();
-                b.bellmanFord(completeGraph, 0, completeGraph.numberOfNodes());
-                long endTimeBF = System.nanoTime();
-                totalTimeBellmanFord += (endTimeBF - startTimeBF) / 1e6;
-
-                long startTimeDijkstra = System.nanoTime();
-                d.dijkstra(completeGraph, 0);
-                long endTimeDijkstra = System.nanoTime();
-                totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
-            }
-
-            System.out.println("Size: " + size + " | Bellman-Ford: " + (totalTimeBellmanFord / 30.0) + " ms | Dijkstra: " + (totalTimeDijkstra / 30.0) + " ms");
+            Graph completeGraph = g.generateAdjMatrix(size, INF, 1.0);
+            runBenchmark(size, 1.0, 0, completeGraph);
         }
-        System.out.println();
 
         // Teste: Grafo com Componentes Desconexos
         System.out.println("Teste: Grafo com Componentes Desconexos");
         for (int size : sizes) {
-            double totalTimeBellmanFord = 0;
-            double totalTimeDijkstra = 0;
-
-            for (int j = 0; j < 30; j++) {
-                Graph disconnectedGraph = g.generateAdjMatrix(size, INF, 0.05); // Baixa conectividade
-
-                long startTimeBF = System.nanoTime();
-                b.bellmanFord(disconnectedGraph, 0, disconnectedGraph.numberOfNodes());
-                long endTimeBF = System.nanoTime();
-                totalTimeBellmanFord += (endTimeBF - startTimeBF) / 1e6;
-
-                long startTimeDijkstra = System.nanoTime();
-                d.dijkstra(disconnectedGraph, 0);
-                long endTimeDijkstra = System.nanoTime();
-                totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
-            }
-
-            System.out.println("Size: " + size + " | Bellman-Ford: " + (totalTimeBellmanFord / 30.0) + " ms | Dijkstra: " + (totalTimeDijkstra / 30.0) + " ms");
+            Graph disconnectedGraph = g.generateAdjMatrix(size, INF, 0.05);
+            runBenchmark(size, 0.05, 0, disconnectedGraph);
         }
-        System.out.println();
 
         // Teste: Grafo Direcionado Denso com Arestas Negativas
         System.out.println("Teste: Grafo Direcionado Denso com Arestas Negativas");
         for (int size : sizes) {
             double density = 0.9;
             double negProb = 0.5;
-
-            double totalTimeBellmanFord = 0;
-            double totalTimeDijkstra = 0;
-
-            for (int j = 0; j < 30; j++) {
-                Graph graph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
-
-                long startTimeBF = System.nanoTime();
-                b.bellmanFord(graph, 0, graph.numberOfNodes());
-                long endTimeBF = System.nanoTime();
-                totalTimeBellmanFord += (endTimeBF - startTimeBF) / 1e6;
-
-                long startTimeDijkstra = System.nanoTime();
-                d.dijkstra(graph, 0);
-                long endTimeDijkstra = System.nanoTime();
-                totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
-            }
-
-            System.out.println("Size: " + size + " | Bellman-Ford: " + (totalTimeBellmanFord / 30.0) + " ms | Dijkstra: " + (totalTimeDijkstra / 30.0) + " ms");
+            Graph graph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
+            runBenchmarkNegativeEdges(size, density, negProb, graph);
         }
 
-        System.out.println();
-
-        // Teste: Grafo Esparso e Grande
         System.out.println("Teste: Grafo Muito Grande e Esparso");
-        int largeSize = 500;
-        double sparseDensity = 0.01;
+            int size = 500;
+            double density = 0.01;
+            Graph graph = g.generateAdjMatrix(size, INF, density);
+            runBenchmark(size, density, 0, graph);
+    }
+
+    private static void runBenchmark(int size, double density, double negProb, Graph graph) {
         double totalTimeBellmanFord = 0;
         double totalTimeDijkstra = 0;
+        double totalTimeJohnson = 0;
+        long totalMemoryBellmanFord = 0;
+        long totalMemoryDijkstra = 0;
+        long totalMemoryJohnson = 0;
+        Runtime runtime = Runtime.getRuntime();
 
-        for (int j = 0; j < 10; j++) {  // Reduzindo para 10 execuções devido ao tamanho
-            Graph graph = g.generateAdjMatrix(largeSize, INF, sparseDensity);
+        for (int i = 0; i < 30; i++) {
+            runtime.gc();
+            long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+            long startTime = System.nanoTime();
 
-            long startTimeBF = System.nanoTime();
-            b.bellmanFord(graph, 0, graph.numberOfNodes());
-            long endTimeBF = System.nanoTime();
-            totalTimeBellmanFord += (endTimeBF - startTimeBF) / 1e6;
+            try {
+                bellmanFord(graph, 0, graph.numberOfNodes());
+            } catch (Exception e) {
+            }
 
-            long startTimeDijkstra = System.nanoTime();
-            d.dijkstra(graph, 0);
-            long endTimeDijkstra = System.nanoTime();
-            totalTimeDijkstra += (endTimeDijkstra - startTimeDijkstra) / 1e6;
+            long endTime = System.nanoTime();
+            long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryBellmanFord += (memoryAfter - memoryBefore) / 1024;
+            totalTimeBellmanFord += (endTime - startTime) / 1e6;
+
+            runtime.gc();
+            memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+            startTime = System.nanoTime();
+
+            dijkstra(graph, 0);
+
+            endTime = System.nanoTime();
+            memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryDijkstra += (memoryAfter - memoryBefore) / 1024;
+            totalTimeDijkstra += (endTime - startTime) / 1e6;
+
+            runtime.gc();
+            memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeJohnson = System.nanoTime();
+            johnson(graph);
+            long endTimeJohnson = System.nanoTime();
+            memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryJohnson += (memoryAfter - memoryBefore) / 1024;
+            totalTimeJohnson += (endTimeJohnson - startTimeJohnson) / 1e6;
         }
 
-            System.out.println("Size: " + largeSize + " | Bellman-Ford: " + (totalTimeBellmanFord / 10.0) + " ms | Dijkstra: " + (totalTimeDijkstra / 10.0) + " ms");
+        totalTimeBellmanFord /= 30.0;
+        totalTimeDijkstra /= 30.0;
+        totalTimeJohnson /= 30.0;
+        totalMemoryBellmanFord /= 30.0;
+        totalMemoryDijkstra /= 30.0;
+        totalMemoryJohnson /= 30.0;
+
+        System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
+        System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
+        System.out.println("(Dijkstra) Time: " + totalTimeDijkstra + " ms, Memory: " + totalMemoryDijkstra + " KB");
+        System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
+        System.out.println();
+    }
+
+    public static void runBenchmarkNegativeEdges(int size, double density, double negProb, Graph graph) {
+        double totalTimeBellmanFord = 0;
+        double totalTimeJohnson = 0;
+        long totalMemoryBellmanFord = 0;
+        long totalMemoryJohnson = 0;
+
+        for (int j = 0; j < 30; j++) {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.gc();
+            long memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeBellmanFord = System.nanoTime();
+            try {
+                bellmanFord(graph, 0, graph.numberOfNodes());
+            } catch (Exception e) {
+            }
+            long endTimeBellmanFord = System.nanoTime();
+            long memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryBellmanFord += (memoryAfter - memoryBefore) / 1024;
+            totalTimeBellmanFord += (endTimeBellmanFord - startTimeBellmanFord) / 1e6;
+
+            runtime.gc();
+            memoryBefore = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeJohnson = System.nanoTime();
+            johnson(graph);
+            long endTimeJohnson = System.nanoTime();
+            memoryAfter = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryJohnson += (memoryAfter - memoryBefore) / 1024;
+            totalTimeJohnson += (endTimeJohnson - startTimeJohnson) / 1e6;
+        }
+
+        totalTimeBellmanFord /= 30.0;
+        totalTimeJohnson /= 30.0;
+        totalMemoryBellmanFord /= 30.0;
+        totalMemoryJohnson /= 30.0;
+
+        System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
+        System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
+        System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
+        System.out.println();
     }
 }

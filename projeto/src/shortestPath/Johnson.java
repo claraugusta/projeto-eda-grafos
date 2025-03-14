@@ -14,7 +14,7 @@ public class Johnson {
 
     private static final int INF = Integer.MAX_VALUE;
 
-    public void johnson(Graph graph) {
+    public static void johnson(Graph graph) {
         int V = graph.size();
         int s = V;
         V++;
@@ -30,13 +30,11 @@ public class Johnson {
         newMatrix[s][s] = 0;
 
         Graph expandedGraph = new AdjMatrix(V, newMatrix);
-        System.out.println(expandedGraph.toString());
         int[] h;
         try {
             h = bellmanFord(expandedGraph, s, V);
-            System.out.println(Arrays.toString(h));
         } catch (IllegalStateException e) {
-            System.out.println("Erro: " + e.getMessage());
+//            System.out.println("Erro: " + e.getMessage());
             return;
         }
 
@@ -62,10 +60,10 @@ public class Johnson {
                 }
             }
 
-            System.out.println("Distâncias a partir do vértice " + u + ":");
-            for (int v = 0; v < V - 1; v++) {
-                System.out.println("Para " + v + ": " + (dist.get(v) == INF ? "INF" : dist.get(v)));
-            }
+//            System.out.println("Distâncias a partir do vértice " + u + ":");
+//            for (int v = 0; v < V - 1; v++) {
+//                System.out.println("Para " + v + ": " + (dist.get(v) == INF ? "INF" : dist.get(v)));
+//            }
         }
     }
 
