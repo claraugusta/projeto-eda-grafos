@@ -5,7 +5,9 @@ import graphs.*;
 import java.util.Random;
 
 public class GenerateGraphs {
-    public static Graph generateAdjList(int size, double density) {
+    private Random rand = new Random();
+
+    public  Graph generateAdjList(int size, double density) {
         Graph graph = new AdjList(size);
         Random rand = new Random();
         for (int i = 0; i < size; i++) {
@@ -17,7 +19,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateAdjMatrix(int size, int nullEdgeValue, double density){
+    public  Graph generateAdjMatrix(int size, int nullEdgeValue, double density){
         Graph graph = new AdjMatrix(size, nullEdgeValue);
         Random rand = new Random();
         for (int k = 0; k < size; k++)
@@ -47,7 +49,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateDirectedAdjMatrix(int size, int nullEdgeValue, double density) {
+    public  Graph generateDirectedAdjMatrix(int size, int nullEdgeValue, double density) {
         Graph graph = new DirectedAdjMatrix(size, nullEdgeValue);
         for (int i = 0; i < size; i++)
             graph.addNode(i);
@@ -61,7 +63,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateDirectedAdjMatrixNegativeEdges(
+    public  Graph generateDirectedAdjMatrixNegativeEdges(
             int size, int nullEdgeValue, double density, double negativeProb, int maxWeight) {
 
         Graph graph = new DirectedAdjMatrix(size, nullEdgeValue);
@@ -83,7 +85,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateTreeDirectedAdjMatrix(int size, int nullEdgeValue) {
+    public  Graph generateTreeDirectedAdjMatrix(int size, int nullEdgeValue) {
         Graph graph = new DirectedAdjMatrix(size, nullEdgeValue);
         for (int i = 0; i < size; i++)
             graph.addNode(i);
@@ -95,7 +97,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateAdjMatrix(int size, int nullEdgeValue) {
+    public  Graph generateAdjMatrix(int size, int nullEdgeValue) {
         Graph graph = new AdjMatrix(size, nullEdgeValue);
         for (int i = 0; i < size; i++)
             graph.addNode(i);
@@ -107,7 +109,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateTreeAdjMatrix(int size, int nullEdgeValue, int maxWeight) {
+    public  Graph generateTreeAdjMatrix(int size, int nullEdgeValue, int maxWeight) {
         Graph graph = new AdjMatrix(size, nullEdgeValue);
         for (int i = 0; i < size; i++)
             graph.addNode(i);
@@ -120,7 +122,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateTreeAdjList(int size, int nullEdgeValue, int maxWeight) {
+    public  Graph generateTreeAdjList(int size, int nullEdgeValue, int maxWeight) {
         Graph graph = new AdjList(size);
         for (int i = 0; i < size; i++)
             graph.addNode(i);
@@ -133,7 +135,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateTreeAdjList(int size, int nullEdgeValue) {
+    public Graph generateTreeAdjList(int size, int nullEdgeValue) {
         Graph graph = new AdjList(size);
         for (int i = 0; i < size; i++)
             graph.addNode(i);
@@ -144,42 +146,44 @@ public class GenerateGraphs {
         }
         return graph;
     }
+    public Graph generateGridGraph(int rows, int cols) {
+        int size = rows * cols;
+        Graph graph = new AdjList(size);
 
-    public static void main(String[] args) {
-        int size = 5;
-        int nullEdgeValue = 0;
-        double density = 0.5;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int node = i * cols + j;
+                if (j < cols - 1) graph.addEdge(node, node + 1, 1);
+                if (i < rows - 1) graph.addEdge(node, node + cols, 1);
+            }
+        }
+        return graph;
+    }
 
-        Graph graph = generateDirectedAdjMatrix(size, nullEdgeValue, density);
+    public  Graph generateDeepTreeGraph(int depth) {
+        int size = depth * 2 - 1;
+        Graph graph = new AdjList(size);
 
-        if (graph instanceof DirectedAdjMatrix) {
-            DirectedAdjMatrix directedGraph = (DirectedAdjMatrix) graph;
-            System.out.println("Matriz de Adjacência do Grafo Direcionado:");
-            System.out.println(directedGraph.MatrixToString());
+        for (int i = 0; i < depth - 1; i++) {
+            graph.addEdge(i, i + 1, 1);
         }
 
-        size = 5;
-        nullEdgeValue = 0;
-        density = 0.7;
-        double negativeProb = 0.4;
-        int maxWeight = 10;
-
-        graph = generateDirectedAdjMatrixNegativeEdges(
-                size, nullEdgeValue, density, negativeProb, maxWeight);
-
-        if (graph instanceof DirectedAdjMatrix) {
-            DirectedAdjMatrix directedGraph = (DirectedAdjMatrix) graph;
-            System.out.println("Matriz de Adjacência do Grafo Direcionado com Arestas Negativas:");
-            System.out.println(directedGraph.MatrixToString());
+        for (int i = depth; i < size; i++) {
+            graph.addEdge(0, i, 1);
         }
 
-        Graph tree = generateTreeAdjMatrix(size, nullEdgeValue, maxWeight);
+        return graph;
+    }
 
-        if (tree instanceof AdjMatrix) {
-            AdjMatrix tree1 = (AdjMatrix) tree;
-            System.out.println("Matriz de Adjacência da Árvore:");
-//            System.out.println(tree1.MatrixToString());
+    public Graph generateDenseGraph(int size, double density) {
+        Graph graph = new AdjList(size);
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (rand.nextDouble() < density) {
+                    graph.addEdge(i, j, 1);
+                }
+            }
         }
+        return graph;
     }
 }
-

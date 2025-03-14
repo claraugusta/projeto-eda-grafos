@@ -2,9 +2,6 @@ package benchmark;
 
 import graphs.Graph;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 import static shortestPath.BellmanFord.bellmanFord;
 import static shortestPath.Dijkstra.dijkstra;
 import static shortestPath.Johnson.johnson;
