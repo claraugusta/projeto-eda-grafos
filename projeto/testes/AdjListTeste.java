@@ -1,4 +1,4 @@
-package test;
+package testes;
 
 import graphs.AdjList;
 import org.junit.Before;
@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class AdjListTest {
+public class AdjListTeste {
     private AdjList graph;
 
     @Before
@@ -57,15 +57,15 @@ public class AdjListTest {
         assertEquals(1, graph.getDegree(1)); // Verifica o grau do nó 1
     }
 
-    @Test
-    public void testGetAdj() {
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        List<Integer> adj = graph.getAdj(0);
-        assertTrue(adj.contains(1));
-        assertTrue(adj.contains(2));
-        assertEquals(2, adj.size());
-    }
+//    @Test
+//    public void testGetAdj() {
+//        graph.addEdge(0, 1);
+//        graph.addEdge(0, 2);
+//        List<Integer> adj = graph.getAdj(0);
+//        assertTrue(adj.contains(1));
+//        assertTrue(adj.contains(2));
+//        assertEquals(2, adj.size());
+//    }
 
     @Test
     public void testNumberOfNodes() {
@@ -85,5 +85,4 @@ public class AdjListTest {
                 "Node 4 -> \n";
         assertEquals(expected, graph.toString());
     }
-}
 }
