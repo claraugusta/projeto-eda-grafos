@@ -28,6 +28,9 @@ public class AdjMatrix implements Graph{
         this.nullEdgeValue = Integer.MAX_VALUE;
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
+        for (int i = 0; i < maxNodes; i++)
+            addNode(i);
+
         this.adjMatrix = matrix;
     }
 
@@ -99,6 +102,7 @@ public class AdjMatrix implements Graph{
         return degree;
     }
 
+
     public String MatrixToString(){
         String out = "";
         for (int i = 0; i < this.maxNodes; i++) {
@@ -115,7 +119,6 @@ public class AdjMatrix implements Graph{
     public int size() {
         return this.adjMatrix.length;
     }
-
     @Override
     public String toString(){
         String out = "";

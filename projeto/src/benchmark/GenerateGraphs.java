@@ -5,7 +5,7 @@ import graphs.*;
 import java.util.Random;
 
 public class GenerateGraphs {
-    public static Graph generateAdjListGraph(int size, double density) {
+    public static Graph generateAdjList(int size, double density) {
         Graph graph = new AdjList(size);
         Random rand = new Random();
         for (int i = 0; i < size; i++) {
@@ -17,7 +17,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public static Graph generateAdjMatrixGraph(int size, int nullEdgeValue, double density){
+    public static Graph generateAdjMatrix(int size, int nullEdgeValue, double density){
         Graph graph = new AdjMatrix(size, nullEdgeValue);
         Random rand = new Random();
         for (int k = 0; k < size; k++)
@@ -26,6 +26,22 @@ public class GenerateGraphs {
             for (int j = i + 1; j < size; j++) {
                 if (rand.nextDouble() < density)
                     graph.addEdge(i, j, 1);
+            }
+        }
+        return graph;
+    }
+
+    public Graph generateAdjMatrixWeight(int size, int nullEdgeValue, double density, int maxWeight){
+        Graph graph = new AdjMatrix(size, nullEdgeValue);
+        Random rand = new Random();
+        for (int k = 0; k < size; k++)
+            graph.addNode(k);
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (rand.nextDouble() < density){
+                    int weight = rand.nextInt(maxWeight) + 1;
+                    graph.addEdge(i, j, weight);
+                }
             }
         }
         return graph;
@@ -162,7 +178,7 @@ public class GenerateGraphs {
         if (tree instanceof AdjMatrix) {
             AdjMatrix tree1 = (AdjMatrix) tree;
             System.out.println("Matriz de Adjacência da Árvore:");
-            System.out.println(tree1.MatrixToString());
+//            System.out.println(tree1.MatrixToString());
         }
     }
 }
