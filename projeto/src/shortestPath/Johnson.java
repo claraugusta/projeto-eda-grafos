@@ -40,7 +40,6 @@ public class Johnson {
             return;
         }
 
-        // Passo 3: Recalcular os pesos das arestas
         int[][] alteredGraph = new int[V - 1][V - 1];
         for (int u = 0; u < V - 1; u++) {
             for (int v = 0; v < V - 1; v++) {
@@ -53,19 +52,16 @@ public class Johnson {
             }
         }
 
-        // Passo 4: Executar Dijkstra a partir de cada vértice no grafo com pesos recalculados
         Graph altGraph = new AdjMatrix(V - 1, alteredGraph);
         for (int u = 0; u < V - 1; u++) {
             Map<Integer, Integer> dist = dijkstra(altGraph, u);
 
-            // Passo 5: Ajustar as distâncias para os valores originais
             for (int v = 0; v < V - 1; v++) {
                 if (dist.get(v) != null) {
                     dist.put(v, dist.get(v) - h[u] + h[v]);
                 }
             }
 
-            // Exibir as distâncias
             System.out.println("Distâncias a partir do vértice " + u + ":");
             for (int v = 0; v < V - 1; v++) {
                 System.out.println("Para " + v + ": " + (dist.get(v) == INF ? "INF" : dist.get(v)));
@@ -101,10 +97,8 @@ public class Johnson {
                 {2, INF, INF, INF, 0}  // Arestas do vértice 4
         });
 
-        // Instanciando o algoritmo de Johnson
         Johnson johnson = new Johnson();
 
-        // Executando o algoritmo de Johnson no grafo
         johnson.johnson(graph3);
     }
 }
