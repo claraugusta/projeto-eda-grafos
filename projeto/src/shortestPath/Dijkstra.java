@@ -10,7 +10,15 @@ public class Dijkstra {
     public static Map<Integer, Integer> dijkstra(Graph graph, int source) {
         int n = graph.size();
         Map<Integer, Integer> dist = new HashMap<>(); 
-        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1])); 
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+
+        for (int i = 0; i < n; i++) {
+            for (int neighbor : graph.getAdj(i)) {
+                if (graph.getWeight(i, neighbor) < 0) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
 
         // Inicializa as distâncias e a fila de prioridade
         for (int i = 0; i < n; i++) {
