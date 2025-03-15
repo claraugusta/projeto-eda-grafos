@@ -85,7 +85,7 @@ public class AdjMatrixTeste {
         graph.addNode(1);
         graph.addNode(2);
         graph.addEdge(1, 2, 10);
-        String matrixString = graph.MatrixToString();
+        String matrixString = graph.toString();
         assertNotNull(matrixString);
         assertTrue(matrixString.contains("10"));
     }
