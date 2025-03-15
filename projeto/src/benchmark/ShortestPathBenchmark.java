@@ -43,7 +43,7 @@ public class ShortestPathBenchmark {
             double density = 0.5;
             double negProb = 0.2;
             Graph adjMatrix = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
-            AdjListWeighted adjListWeighted = g.generateAdjListWeighted(size, INF, density, negProb, 50);
+            AdjListWeighted adjListWeighted = g.generateAdjListWeighted(size, density, negProb, 50);
             runBenchmarkBellman(size, density, negProb, adjMatrix, adjListWeighted);
         }
 

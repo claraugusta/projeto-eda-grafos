@@ -18,13 +18,6 @@ public class AdjListWeighted {
         return this.nodes;
     }
 
-    public boolean addNode(int node) {
-        if (node >= 0 && node < nodes) {
-            return true;
-        }
-        return false;
-    }
-
     public boolean addEdge(int u, int v, int weight) {
         if (u >= 0 && u < nodes && v >= 0 && v < nodes) {
             adjList.get(u).add(new Edge(u, v, weight));
@@ -61,15 +54,14 @@ public class AdjListWeighted {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        String out = "";
         for (int i = 0; i < nodes; i++) {
-            sb.append("Node ").append(i).append(" -> ");
-            for (Edge edge : adjList.get(i)) {
-                sb.append("(").append(edge.nodeOut).append(", Peso: ").append(edge.weight).append(") ");
+            out += "de " + i + ":\n";
+            for(Edge e : getAdj(i)){
+                out += "para " + e.nodeOut + ": " + e.weight+ "\n";
             }
-            sb.append("\n");
         }
-        return sb.toString();
+        return out;
     }
 
     public class Edge {

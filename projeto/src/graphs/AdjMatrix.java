@@ -103,8 +103,8 @@ public class AdjMatrix implements Graph{
         return degree;
     }
 
-
-    public String MatrixToString(){
+    @Override
+    public String toString(){
         String out = "";
         for (int i = 0; i < this.maxNodes; i++) {
             String l = "";
@@ -120,13 +120,13 @@ public class AdjMatrix implements Graph{
     public int size() {
         return this.adjMatrix.length;
     }
-    @Override
-    public String toString(){
-        String out = "";
-        for (int i = 0; i < this.maxNodes; i++) {
-            out += "pos: " + i + ", node: " + this.nodes[i] + "\n";
-        }
-        return out;
-    }
+
+//    public String toString(){
+//        String out = "";
+//        for (int i = 0; i < this.maxNodes; i++) {
+//            out += "pos: " + i + ", node: " + this.nodes[i] + "\n";
+//        }
+//        return out;
+//    }
 
 }

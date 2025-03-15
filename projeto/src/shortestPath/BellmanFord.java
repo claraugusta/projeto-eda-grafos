@@ -33,7 +33,6 @@ public class BellmanFord {
             }
             if (!changed) break;
         }
-
         // Verificação de ciclos negativos
         for (int u = 0; u < V; u++) {
             for (int v = 0; v < V; v++) {
