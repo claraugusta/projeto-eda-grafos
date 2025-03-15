@@ -54,4 +54,31 @@ public class Bfs{
         }
         return false;
     }
+
+    public String bfsSeq(Graph graph, int start) {
+        boolean[] visited = new boolean[graph.numberOfNodes()];
+        if (graph == null || visited == null)
+            throw new NullPointerException("Null graph, try again");
+        if (start > visited.length || start < 0)
+            throw new NullPointerException("Invalid start node, try another number");
+
+        Queue<Integer> q = new LinkedList<>();
+
+        String out = "";
+        visited[start] = true;
+        q.add(start);
+
+        while (!q.isEmpty()) {
+            out += q.peek() + " ";
+            int current = q.poll();
+
+            for (int neighbors : graph.getAdj(current)) {
+                if (!visited[neighbors]) {
+                    visited[neighbors] = true;
+                    q.add(neighbors);
+                }
+            }
+        }
+        return out.trim();
+    }
 }
