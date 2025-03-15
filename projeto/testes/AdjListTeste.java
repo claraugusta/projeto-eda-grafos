@@ -55,16 +55,6 @@ public class AdjListTeste {
         assertEquals(1, graph.getDegree(1)); // Verifica o grau do nó 1
     }
 
-//    @Test
-//    public void testGetAdj() {
-//        graph.addEdge(0, 1);
-//        graph.addEdge(0, 2);
-//        List<Integer> adj = graph.getAdj(0);
-//        assertTrue(adj.contains(1));
-//        assertTrue(adj.contains(2));
-//        assertEquals(2, adj.size());
-//    }
-
     @Test
     public void testNumberOfNodes() {
         assertEquals(5, graph.numberOfNodes());
