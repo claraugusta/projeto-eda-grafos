@@ -19,7 +19,7 @@ public class GenerateGraphs {
         return graph;
     }
 
-    public AdjListWeighted generateAdjListWeighted(int size, int nullEdgeValue, double density,
+    public AdjListWeighted generateAdjListWeighted(int size, double density,
                                                    double negativeProb, int maxWeight) {
         AdjListWeighted graph = new AdjListWeighted(size);
         Random rand = new Random();
@@ -84,10 +84,8 @@ public class GenerateGraphs {
             int size, int nullEdgeValue, double density, double negativeProb, int maxWeight) {
 
         Graph graph = new DirectedAdjMatrix(size, nullEdgeValue);
-
         for (int i = 0; i < size; i++)
             graph.addNode(i);
-
         Random rand = new Random();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {

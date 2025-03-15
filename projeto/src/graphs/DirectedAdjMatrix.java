@@ -1,6 +1,7 @@
 package graphs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //grafo direcionado e ponderado
@@ -18,6 +19,9 @@ public class DirectedAdjMatrix implements Graph{
         this.qtdNodes = 0;
         this.nodes = new int[maxNodes];
         this.adjMatrix = new int[this.maxNodes][this.maxNodes];
+        for (int i = 0; i < maxNodes; i++) {
+            Arrays.fill(this.adjMatrix[i], nullEdgeValue);
+        }
     }
 
     public int getNodeIndex(int node){
@@ -53,8 +57,8 @@ public class DirectedAdjMatrix implements Graph{
         int c = getNodeIndex(nodeOut);
         int l = getNodeIndex(nodeIn);
         if(l == -1 || c == -1)
-            return -1;
-        return this.adjMatrix[l][c];
+            return nullEdgeValue;
+        return this.adjMatrix[c][l];
     }
 
     public int getOutDegree(int node){
@@ -80,7 +84,8 @@ public class DirectedAdjMatrix implements Graph{
         }
         return inDegree;
     }
-    public String MatrixToString(){
+    @Override
+    public String toString(){
         String out = "";
         for (int i = 0; i < this.maxNodes; i++) {
             String l = "";
@@ -116,41 +121,6 @@ public class DirectedAdjMatrix implements Graph{
                 nodesAdj.add(i);
         }
         return nodesAdj;
-    }
-
-    public static void main(String[] args) {
-        // Criando um grafo com capacidade para 5 nós e valor nulo como 0
-        DirectedAdjMatrix graph = new DirectedAdjMatrix(5, 0);
-
-        // Adicionando nós
-        graph.addNode(10);
-        graph.addNode(20);
-        graph.addNode(30);
-        graph.addNode(40);
-        graph.addNode(50);
-
-        // Adicionando arestas com pesos
-        graph.addEdge(10, 20, 5);
-        graph.addEdge(10, 30, 2);
-        graph.addEdge(20, 40, 8);
-        graph.addEdge(30, 50, 3);
-        graph.addEdge(40, 50, 7);
-
-        // Exibindo a matriz de adjacência
-        System.out.println("Matriz de Adjacência:");
-        System.out.println(graph.MatrixToString());
-
-        // Exibindo os nós armazenados
-        System.out.println("Nós do Grafo:");
-        System.out.println(graph.nodesToString());
-
-        // Testando a recuperação de peso
-        System.out.println("Peso da aresta entre 10 e 30: " + graph.getWeight(10, 30));
-        System.out.println("Peso da aresta entre 20 e 40: " + graph.getWeight(20, 40));
-
-        // Testando o grau dos nós
-        System.out.println("Grau do nó 10: " + graph.getOutDegree(10));
-        System.out.println("Grau do nó 50: " + graph.getInDegree(50));
     }
 
 }
