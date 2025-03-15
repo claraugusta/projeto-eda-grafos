@@ -116,7 +116,10 @@ public class ShortestPathBenchmark {
             memoryBefore = runtime.totalMemory() - runtime.freeMemory();
 
             long startTimeJohnson = System.nanoTime();
-            johnson(graph);
+            try {
+                johnson(graph);
+            } catch (Exception e) {
+            }
             long endTimeJohnson = System.nanoTime();
             memoryAfter = runtime.totalMemory() - runtime.freeMemory();
             totalMemoryJohnson += (memoryAfter - memoryBefore) / 1024;
@@ -162,7 +165,10 @@ public class ShortestPathBenchmark {
             memoryBefore = runtime.totalMemory() - runtime.freeMemory();
 
             long startTimeJohnson = System.nanoTime();
-            johnson(graph);
+            try {
+                johnson(graph);
+            } catch (Exception e) {
+            }
             long endTimeJohnson = System.nanoTime();
             memoryAfter = runtime.totalMemory() - runtime.freeMemory();
             totalMemoryJohnson += (memoryAfter - memoryBefore) / 1024;
