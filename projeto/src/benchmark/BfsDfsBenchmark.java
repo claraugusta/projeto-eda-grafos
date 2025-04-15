@@ -64,7 +64,7 @@ public class BfsDfsBenchmark {
 
     public static void main(String[] args) {
         try {
-            csvWriter = new FileWriter("benchmarkBFSDFS.csv");
+            csvWriter = new FileWriter("data/benchmarkBFSDFS.csv");
             csvWriter.write("cenario,algoritmo,tempo,memoria\n");
 
             GenerateGraphs generator = new GenerateGraphs();

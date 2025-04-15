@@ -1,0 +1,9 @@
+cenario,algoritmo,tempo,memoria
+"Grafo em Grade",BFS,4,221,3047,00
+"Grafo em Grade",DFS,0,433,318,00
+"Árvore Profunda",BFS,1,488,2048,00
+"Árvore Profunda",DFS,2,919,2368,00
+"Dense Graph (Nó Inexistente)",BFS,24,128,271,00
+"Dense Graph (Nó Inexistente)",DFS,21,749,232,00
+"Dense Graph (Nó Existente)",BFS,33,528,0,00
+"Dense Graph (Nó Existente)",DFS,0,022,1024,00
