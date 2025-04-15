@@ -6,6 +6,9 @@ import graphs.Graph;
 import static shortestPath.BellmanFord.bellmanFord;
 import static shortestPath.Dijkstra.dijkstra;
 import static shortestPath.Johnson.johnson;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class ShortestPathBenchmark {
 
@@ -18,66 +21,70 @@ public class ShortestPathBenchmark {
         double[] densities = {0.1, 0.3, 0.5, 0.7};
         double[] negativeEdgeProbs = {0.1, 0.3, 0.6};
 
-        System.out.println("Teste: Grafos com arestas negativas");
-        for (int size : sizes) {
-            for (double density : densities) {
-                for (double negProb : negativeEdgeProbs) {
-                    Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
-                    runBenchmarkNegativeEdges(size, density, negProb, randGraph);
+        try (PrintWriter writer = new PrintWriter(new FileWriter("benchmark_Shortest_path.csv"))) {
+            writer.println("Tipo,Size,Density,NegProb,Algoritmo,Tempo(ms),Memoria(KB)");
+
+            System.out.println("Teste: Grafos com arestas negativas");
+            for (int size : sizes) {
+                for (double density : densities) {
+                    for (double negProb : negativeEdgeProbs) {
+                        Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
+                        runBenchmarkNegativeEdges(writer, size, density, negProb, randGraph);
+                    }
                 }
             }
-        }
 
-        // Comparação entre matriz e lista de adjacência
-        System.out.println("Comparação entre Matriz e Lista de Adjacência");
-        for (int size : sizes) {
-            double density = 0.5;
-            Graph matrixGraph = g.generateAdjMatrix(size, INF, density);
-            Graph listGraph = g.generateTreeAdjList(size, INF, 50);
-            runBenchmark(size, density, 0, matrixGraph);
-            runBenchmark(size, density, 0, listGraph);
-        }
+            // Comparação entre matriz e lista de adjacência
+            System.out.println("Comparação entre Matriz e Lista de Adjacência");
+            for (int size : sizes) {
+                double density = 0.5;
+                Graph matrixGraph = g.generateAdjMatrix(size, INF, density);
+                Graph listGraph = g.generateTreeAdjList(size, INF, 50);
+                runBenchmark(writer, size, density, 0, matrixGraph);
+                runBenchmark(writer, size, density, 0, listGraph);
+            }
 
-        System.out.println("Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência");
-        for(int size : sizes){
-            double density = 0.5;
-            double negProb = 0.2;
-            Graph adjMatrix = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
-            AdjListWeighted adjListWeighted = g.generateAdjListWeighted(size, density, negProb, 50);
-            runBenchmarkBellman(size, density, negProb, adjMatrix, adjListWeighted);
-        }
+            System.out.println("Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência");
+            for(int size : sizes){
+                double density = 0.5;
+                double negProb = 0.2;
+                Graph adjMatrix = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
+                AdjListWeighted adjListWeighted = g.generateAdjListWeighted(size, density, negProb, 50);
+                runBenchmarkBellman(writer, size, density, negProb, adjMatrix, adjListWeighted);
+            }
 
-        // Teste: Grafo Completamente Conectado
-        System.out.println("Teste: Grafo Completamente Conectado");
-        for (int size : sizes) {
-            Graph completeGraph = g.generateAdjMatrix(size, INF, 1.0);
-            runBenchmark(size, 1.0, 0, completeGraph);
-        }
+            System.out.println("Teste: Grafo Completamente Conectado");
+            for (int size : sizes) {
+                Graph completeGraph = g.generateAdjMatrix(size, INF, 1.0);
+                runBenchmark(writer, size, 1.0, 0, completeGraph);
+            }
 
-        // Teste: Grafo com Componentes Desconexos
-        System.out.println("Teste: Grafo com Componentes Desconexos");
-        for (int size : sizes) {
-            Graph disconnectedGraph = g.generateAdjMatrix(size, INF, 0.05);
-            runBenchmark(size, 0.05, 0, disconnectedGraph);
-        }
+            System.out.println("Teste: Grafo com Componentes Desconexos");
+            for (int size : sizes) {
+                Graph disconnectedGraph = g.generateAdjMatrix(size, INF, 0.05);
+                runBenchmark(writer, size, 0.05, 0, disconnectedGraph);
+            }
 
-        // Teste: Grafo Direcionado Denso com Arestas Negativas
-        System.out.println("Teste: Grafo Direcionado Denso com Arestas Negativas");
-        for (int size : sizes) {
-            double density = 0.9;
-            double negProb = 0.5;
-            Graph graph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
-            runBenchmarkNegativeEdges(size, density, negProb, graph);
-        }
+            System.out.println("Teste: Grafo Direcionado Denso com Arestas Negativas");
+            for (int size : sizes) {
+                double density = 0.9;
+                double negProb = 0.5;
+                Graph graph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
+                runBenchmarkNegativeEdges(writer, size, density, negProb, graph);
+            }
 
-        System.out.println("Teste: Grafo Muito Grande e Esparso");
+            System.out.println("Teste: Grafo Muito Grande e Esparso");
             int size = 500;
             double density = 0.01;
             Graph graph = g.generateAdjMatrix(size, INF, density);
-            runBenchmark(size, density, 0, graph);
+            runBenchmark(writer, size, density, 0, graph);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void runBenchmark(int size, double density, double negProb, Graph graph) {
+    private static void runBenchmark(PrintWriter writer, int size, double density, double negProb, Graph graph) {
         double totalTimeBellmanFord = 0;
         double totalTimeDijkstra = 0;
         double totalTimeJohnson = 0;
@@ -137,10 +144,13 @@ public class ShortestPathBenchmark {
         System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
         System.out.println("(Dijkstra) Time: " + totalTimeDijkstra + " ms, Memory: " + totalMemoryDijkstra + " KB");
         System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
+        writer.printf("Grafo Geral,%d,%.2f,%.2f,Bellman-Ford,%.3f,%d\n", size, density, negProb, totalTimeBellmanFord, totalMemoryBellmanFord);
+        writer.printf("Grafo Geral,%d,%.2f,%.2f,Dijkstra,%.3f,%d\n", size, density, negProb, totalTimeDijkstra, totalMemoryDijkstra);
+        writer.printf("Grafo Geral,%d,%.2f,%.2f,Johnson,%.3f,%d\n", size, density, negProb, totalTimeJohnson, totalMemoryJohnson);
         System.out.println();
     }
 
-    public static void runBenchmarkNegativeEdges(int size, double density, double negProb, Graph graph) {
+    public static void runBenchmarkNegativeEdges(PrintWriter writer, int size, double density, double negProb, Graph graph) {
         double totalTimeBellmanFord = 0;
         double totalTimeJohnson = 0;
         long totalMemoryBellmanFord = 0;
@@ -183,10 +193,12 @@ public class ShortestPathBenchmark {
         System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
         System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
         System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
+        writer.printf("Arestas Negativas,%d,%.2f,%.2f,Bellman-Ford,%.3f,%.3f\n", size, density, negProb, totalTimeBellmanFord, (double) totalMemoryBellmanFord);
+        writer.printf("Arestas Negativas,%d,%.2f,%.2f,Johnson,%.3f,%.3f\n", size, density, negProb, totalTimeJohnson, (double) totalMemoryJohnson);
         System.out.println();
     }
 
-    public static void runBenchmarkBellman(int size, double density, double negProb, Graph adjMatrix, AdjListWeighted adjList) {
+    public static void runBenchmarkBellman(PrintWriter writer, int size, double density, double negProb, Graph adjMatrix, AdjListWeighted adjList) {
         double totalTimeAdjMatrix = 0;
         double totalTimeAdjList = 0;
         long totalMemoryAdjMatrix = 0;
@@ -229,6 +241,8 @@ public class ShortestPathBenchmark {
         System.out.println("Size: " + size + ", Density: " + density + ", NegProb: " + negProb);
         System.out.println("(Bellman-Ford: Adjacency Matrix) Time: " + totalTimeAdjMatrix + " ms, Memory: " + totalMemoryAdjMatrix + " KB");
         System.out.println("(Bellman-Ford: Adjacency List) Time: " + totalTimeAdjList + " ms, Memory: " + totalMemoryAdjList + " KB");
+        writer.printf("Bellman Matrix vs List,%d,%.2f,%.2f,Matrix,%.3f,%d\n", size, density, negProb, totalTimeAdjMatrix, totalMemoryAdjMatrix);
+        writer.printf("Bellman Matrix vs List,%d,%.2f,%.2f,List,%.3f,%d\n", size, density, negProb, totalTimeAdjList, totalMemoryAdjList);
         System.out.println();
     }
 }
