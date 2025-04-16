@@ -12,14 +12,6 @@ public class Dijkstra {
         Map<Integer, Integer> dist = new HashMap<>(); 
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
 
-        for (int i = 0; i < n; i++) {
-            for (int neighbor : graph.getAdj(i)) {
-                if (graph.getWeight(i, neighbor) < 0) {
-                    throw new IllegalArgumentException();
-                }
-            }
-        }
-
         // Inicializa as distâncias e a fila de prioridade
         for (int i = 0; i < n; i++) {
             dist.put(i, INF);
@@ -38,7 +30,7 @@ public class Dijkstra {
             for (int neighbor : graph.getAdj(node)) {
                 int weight = graph.getWeight(node, neighbor);
                 if (weight == INF) continue;
-                int newDist = currentDist + Math.abs(weight);
+                int newDist = currentDist + weight;
 
                 // Se encontramos um caminho mais curto, atualizamos a distância
                 if (newDist < dist.get(neighbor)) {
@@ -52,20 +44,6 @@ public class Dijkstra {
 
     public static void main(String[] args) {
 
-        // AdjList
-//        AdjList adjList = new AdjList(5);
-//        adjList.addEdge(0, 1, 10);
-//        adjList.addEdge(0, 2, 3);
-//        adjList.addEdge(1, 2, 1);
-//        adjList.addEdge(1, 3, 2);
-//        adjList.addEdge(2, 3, 8);
-//        adjList.addEdge(3, 4, 7);
-
-//        System.out.println("Shortest Paths from Node 0 (AdjList):");
-//        Map<Integer, Integer> distAdjList = dijkstra(adjList, 0);
-//        System.out.println(distAdjList);
-
-        // AdjMatrix
         int[][] adjMatrix = new int[5][5];
         for (int i = 0; i < 5; i++){
             Arrays.fill(adjMatrix[i], INF);

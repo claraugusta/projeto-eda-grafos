@@ -20,61 +20,82 @@ public class ShortestPathBenchmark {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         int[] sizes = {5, 10, 100};
-        double[] densities = {0.3};
-        double[] negativeEdgeProbs = {0.3};
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("data/benchmark_Shortest_path.csv"))) {
             writer.println("Titulo,Cenario,Algoritmo,Tempo(ms),Memoria(KB)");
 
-            String title = "Teste: Grafos com arestas negativas";
+
+            String title = "Teste: Grafo Direcionado com arestas negativas";
             System.out.println(title);
             for (int size : sizes) {
-                for (double density : densities) {
-                    for (double negProb : negativeEdgeProbs) {
-                        Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
-                        runBenchmarkNegativeEdges(writer,title, size, density, negProb, randGraph);
-                    }
-                }
+                Graph randGraph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, 0.5, 0.3, 50);
+                runBenchmarkNegativeEdges(writer,title, size, 0.4, 0.3, randGraph);
             }
 
+            title = "Teste: Dijkstra X Nearest Neighbor";
+            System.out.println(title);
+            for (int size : sizes) {
+                Graph randGraph = g.generateAdjMatrix(size, INF, 1.0);
+                runBenchmarkDijkstra(writer,title, size, 0.4, 0.3, randGraph);
+            }
 
             title = "Teste Comparação Bellman Ford: Matriz e Lista de Adjacência";
             System.out.println(title);
             for(int size : sizes){
-                double density = 0.5;
+                double density = 0.4;
                 double negProb = 0.2;
                 Graph adjMatrix = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
                 Graph adjListWeighted = g.generateAdjListWeighted(size, density, negProb, 50);
                 runBenchmarkBellman(writer, title, size, density, negProb, adjMatrix, adjListWeighted);
             }
 
-            title = "Teste: Grafo Completamente Conectado";
+            title = "Teste: Grafo Não-Direcionado Denso";
             System.out.println(title);
             for (int size : sizes) {
                 Graph completeGraph = g.generateAdjMatrix(size, INF, 1.0);
-                runBenchmark(writer,title, size, 1.0, 0, completeGraph);
+                runBenchmark(writer,title, size, 0.9, 0, completeGraph);
             }
 
-            title = "Teste: Grafo com Componentes Desconexos";
+            title = "Teste: Grafo Direcionado Denso";
             System.out.println(title);
             for (int size : sizes) {
-                Graph disconnectedGraph = g.generateAdjMatrix(size, INF, 0.05);
-                runBenchmark(writer,title, size, 0.05, 0, disconnectedGraph);
+                Graph completeGraph = g.generateDirectedAdjMatrix(size, INF, 1.0);
+                runBenchmark(writer,title, size, 0.9, 0, completeGraph);
             }
+
             title = "Teste: Grafo Direcionado Denso com Arestas Negativas";
             System.out.println(title);
             for (int size : sizes) {
                 double density = 0.9;
-                double negProb = 0.5;
+                double negProb = 0.4;
                 Graph graph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
                 runBenchmarkNegativeEdges(writer,title, size, density, negProb, graph);
             }
-            title = "Teste: Grafo Muito Grande e Esparso";
+
+            title = "Teste: Grafo Direcionado Esparso com Arestas Negativas";
             System.out.println(title);
-            int size = 500;
-            double density = 0.01;
-            Graph graph = g.generateAdjMatrix(size, INF, density);
-            runBenchmark(writer, title, size, density, 0, graph);
+            for (int size : sizes) {
+                double density = 0.1;
+                double negProb = 0.4;
+                Graph graph = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 20);
+                runBenchmarkNegativeEdges(writer,title, size, density, negProb, graph);
+            }
+
+            title = "Teste: Grafo Não-Direcionado Esparso";
+            System.out.println(title);
+            double density = 0.1;
+            for (int size: sizes) {
+                Graph graph = g.generateAdjMatrix(size, INF, density);
+                runBenchmark(writer, title, size, density, 0, graph);
+            }
+
+            title = "Teste: Grafo Direcionado Esparso";
+            System.out.println(title);
+            density = 0.1;
+            for (int size: sizes) {
+                Graph graph = g.generateDirectedAdjMatrix(size, INF, density);
+                runBenchmark(writer, title, size, density, 0, graph);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,6 +166,19 @@ public class ShortestPathBenchmark {
             long memoryAfterFloydWarshall = runtime.totalMemory() - runtime.freeMemory();
             totalMemoryFloydWarshall += (memoryAfterFloydWarshall - memoryBeforeFloydWarshall) / 1024;
             totalTimeFloydWarshall += (endTimeFloydWarshall - startTimeFloydWarshall) / 1e6;
+
+            runtime.gc();
+            long memoryBeforeNearestNeighbor = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeNearestNeighbor  = System.nanoTime();
+            try {
+                nearestNeighbor(graph,0);
+            } catch (Exception e) {
+            }
+            long endTimeNearestNeighbor  = System.nanoTime();
+            long memoryAfterNearestNeighbor  = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryNearestNeighbor  += (memoryAfterNearestNeighbor  - memoryBeforeNearestNeighbor) / 1024;
+            totalTimeNearestNeighbor  += (endTimeNearestNeighbor  - startTimeNearestNeighbor) / 1e6;
         }
 
 
@@ -152,10 +186,13 @@ public class ShortestPathBenchmark {
         totalTimeBellmanFord /= 30.0;
         totalTimeDijkstra /= 30.0;
         totalTimeJohnson /= 30.0;
-        totalMemoryFloydWarshall /= 30.0;
+        totalTimeFloydWarshall /= 30.0;
+        totalTimeNearestNeighbor /= 30.0;
         totalMemoryBellmanFord /= 30.0;
         totalMemoryDijkstra /= 30.0;
         totalMemoryJohnson /= 30.0;
+        totalMemoryFloydWarshall /= 30.0;
+        totalMemoryNearestNeighbor /= 30.0;
 
         String cenario = String.format("Size: %d", size, density, negProb);
         System.out.println(cenario);
@@ -163,10 +200,12 @@ public class ShortestPathBenchmark {
         System.out.println("(Dijkstra) Time: " + totalTimeDijkstra + " ms, Memory: " + totalMemoryDijkstra + " KB");
         System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
         System.out.println("(FloydWarshall) Time: " + totalTimeFloydWarshall + " ms, Memory: " + totalMemoryFloydWarshall + " KB");
+        System.out.println("(NearestNeighbor) Time: " + totalTimeNearestNeighbor + " ms, Memory: " + totalMemoryNearestNeighbor + " KB");
         writer.printf("\"%s\",\"%s\",Bellman-Ford,%.3f,%d\n",title, cenario, totalTimeBellmanFord, totalMemoryBellmanFord);
         writer.printf("\"%s\",\"%s\",Dijkstra,%.3f,%d\n",title, cenario, totalTimeDijkstra, totalMemoryDijkstra);
         writer.printf("\"%s\",\"%s\",Johnson,%.3f,%d\n",title, cenario, totalTimeJohnson, totalMemoryJohnson);
         writer.printf("\"%s\",\"%s\",FloydWarshall,%.3f,%d\n",title, cenario, totalTimeFloydWarshall, totalMemoryFloydWarshall);
+        writer.printf("\"%s\",\"%s\",NearestNeighbor,%.3f,%d\n",title, cenario, totalTimeNearestNeighbor, totalMemoryNearestNeighbor);
         System.out.println();
     }
 
@@ -239,6 +278,56 @@ public class ShortestPathBenchmark {
         writer.printf("\"%s\",\"%s\",FloydWarshall,%.3f,%d\n",title, cenario, totalTimeFloydWarshall, totalMemoryFloydWarshall);
         System.out.println();
     }
+    public static void runBenchmarkDijkstra(PrintWriter writer,String title, int size, double density, double negProb, Graph graph){
+        double totalTimeDij = 0;
+        double totalTimeNN = 0;
+        long totalMemoryDij = 0;
+        long totalMemoryNN = 0;
+
+
+        for (int j = 0; j < 30; j++) {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.gc();
+            long memoryBeforeDij = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeDij = System.nanoTime();
+            try {
+                dijkstra(graph, 0);
+            } catch (Exception e) {
+            }
+            long endTimeDij = System.nanoTime();
+            long memoryAfterBellmanFord = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryDij += (memoryAfterBellmanFord - memoryBeforeDij) / 1024;
+            totalTimeDij += (endTimeDij - startTimeDij) / 1e6;
+
+            runtime.gc();
+            long memoryBeforeNN= runtime.totalMemory() - runtime.freeMemory();
+            long startTimeNN = System.nanoTime();
+
+            try {
+                johnson(graph);
+            } catch (Exception e) {
+            }
+            long endTimeNN = System.nanoTime();
+            long memoryAfterNN = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryNN += (memoryAfterNN - memoryBeforeNN) / 1024;
+            totalTimeNN += (endTimeNN - startTimeNN) / 1e6;
+
+        }
+
+        totalTimeDij /= 30.0;
+        totalTimeNN /= 30.0;
+        totalMemoryDij /= 30.0;
+        totalMemoryNN /= 30.0;
+
+        String cenario = String.format("Size: %d", size);
+        System.out.println(cenario);
+        System.out.println("(Dijkstra) Time: " + totalTimeDij + " ms, Memory: " + totalMemoryDij + " KB");
+        System.out.println("(Nearest Neighbor) Time: " + totalTimeNN + " ms, Memory: " + totalMemoryNN + " KB");
+        writer.printf("\"%s\",\"%s\",Bellman-Ford,%.3f,%d\n",title, cenario, totalTimeDij,  totalMemoryDij);
+        writer.printf("\"%s\",\"%s\",Johnson,%.3f,%d\n",title, cenario, totalTimeNN, totalMemoryNN);
+        System.out.println();
+    }
 
     public static void runBenchmarkBellman(PrintWriter writer,String title, int size, double density, double negProb, Graph adjMatrix, Graph adjList) {
         double totalTimeAdjMatrix = 0;
@@ -280,7 +369,7 @@ public class ShortestPathBenchmark {
         totalMemoryAdjMatrix /= 30.0;
         totalMemoryAdjList /= 30.0;
 
-        String cenario = String.format("Size: %d", size, density, negProb);
+        String cenario = String.format("Size: %d", size);
         System.out.println(cenario);
         System.out.println("(Bellman-Ford: Adjacency Matrix) Time: " + totalTimeAdjMatrix + " ms, Memory: " + totalMemoryAdjMatrix + " KB");
         System.out.println("(Bellman-Ford: Adjacency List) Time: " + totalTimeAdjList + " ms, Memory: " + totalMemoryAdjList + " KB");
