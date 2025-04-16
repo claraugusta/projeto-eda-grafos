@@ -1,7 +1,6 @@
 package benchmark;
 
 import graphs.AdjListWeighted;
-import graphs.AdjMatrix;
 import graphs.Graph;
 import static shortestPath.BellmanFord.bellmanFord;
 import static shortestPath.Dijkstra.dijkstra;
@@ -137,7 +136,7 @@ public class ShortestPathBenchmark {
         totalMemoryDijkstra /= 30.0;
         totalMemoryJohnson /= 30.0;
 
-        String cenario = String.format("Size: %d | Density: %.2f | NegativeProbability: %.2f", size, density, negProb);
+        String cenario = String.format("Size: %d", size, density, negProb);
         System.out.println(cenario);
         System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
         System.out.println("(Dijkstra) Time: " + totalTimeDijkstra + " ms, Memory: " + totalMemoryDijkstra + " KB");
@@ -188,7 +187,7 @@ public class ShortestPathBenchmark {
         totalMemoryBellmanFord /= 30.0;
         totalMemoryJohnson /= 30.0;
 
-        String cenario = String.format("Size: %d | Density: %.2f | NegativeProbability: %.2f", size, density, negProb);
+        String cenario = String.format("Size: %d", size, density, negProb);
         System.out.println(cenario);
         System.out.println("(Bellman-Ford) Time: " + totalTimeBellmanFord + " ms, Memory: " + totalMemoryBellmanFord + " KB");
         System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
@@ -237,7 +236,7 @@ public class ShortestPathBenchmark {
         totalMemoryAdjMatrix /= 30.0;
         totalMemoryAdjList /= 30.0;
 
-        String cenario = String.format("Size: %d | Density: %.2f | NegativeProbability: %.2f", size, density, negProb);
+        String cenario = String.format("Size: %d", size, density, negProb);
         System.out.println(cenario);
         System.out.println("(Bellman-Ford: Adjacency Matrix) Time: " + totalTimeAdjMatrix + " ms, Memory: " + totalMemoryAdjMatrix + " KB");
         System.out.println("(Bellman-Ford: Adjacency List) Time: " + totalTimeAdjList + " ms, Memory: " + totalMemoryAdjList + " KB");
