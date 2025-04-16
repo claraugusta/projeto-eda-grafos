@@ -1,7 +1,7 @@
 package graphs;
 import java.util.*;
 
-public class AdjListWeighted {
+public class AdjListWeighted implements Graph{
 
     private int nodes;
     private List<List<Edge>> adjList;
@@ -16,6 +16,11 @@ public class AdjListWeighted {
 
     public int size() {
         return this.nodes;
+    }
+
+    @Override
+    public boolean addNode(int Node) {
+        return false;
     }
 
     public boolean addEdge(int u, int v, int weight) {
@@ -35,21 +40,24 @@ public class AdjListWeighted {
         return Integer.MAX_VALUE;
     }
 
-    public boolean hasEdge(int u, int v) {
-        for (Edge edge : adjList.get(u)) {
-            if (edge.nodeOut == v) {
-                return true;
+    @Override
+    public int numberOfNodes() {
+        return 0;
+    }
+
+    public List<Edge> getEdges(int node) {
+        return adjList.get(node);
+    }
+
+    @Override
+    public List<Integer> getAdj(int node) {
+        List<Integer> pesos = new ArrayList<>();
+        if (node >= 0 && node < nodes) {
+            for (Edge edge : adjList.get(node)) {
+                pesos.add(edge.weight);
             }
         }
-        return false;
-    }
-
-    public void removeEdge(int u, int v) {
-        adjList.get(u).removeIf(edge -> edge.nodeOut == v);
-    }
-
-    public List<Edge> getAdj(int node) {
-        return adjList.get(node);
+        return pesos;
     }
 
     @Override
@@ -57,7 +65,7 @@ public class AdjListWeighted {
         String out = "";
         for (int i = 0; i < nodes; i++) {
             out += "de " + i + ":\n";
-            for(Edge e : getAdj(i)){
+            for(Edge e : getEdges(i)){
                 out += "para " + e.nodeOut + ": " + e.weight+ "\n";
             }
         }

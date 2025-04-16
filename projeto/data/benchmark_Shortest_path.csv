@@ -1,40 +1,53 @@
 Titulo,Cenario,Algoritmo,Tempo(ms),Memoria(KB)
-"Teste: Grafos com arestas negativas","Size: 5",Bellman-Ford,0.095,12
-"Teste: Grafos com arestas negativas","Size: 5",Johnson,0.545,15
-"Teste: Grafos com arestas negativas","Size: 10",Bellman-Ford,0.097,2
-"Teste: Grafos com arestas negativas","Size: 10",Johnson,0.130,2
-"Teste: Grafos com arestas negativas","Size: 100",Bellman-Ford,48.085,2
-"Teste: Grafos com arestas negativas","Size: 100",Johnson,91.431,52
-"Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência","Size: 5",Matrix,0.018,2
-"Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência","Size: 5",List,0.039,2
-"Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência","Size: 10",Matrix,0.041,2
-"Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência","Size: 10",List,0.093,5
-"Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência","Size: 100",Matrix,48.532,2
-"Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência","Size: 100",List,2.598,41
-"Teste: Grafo Completamente Conectado","Size: 5",Bellman-Ford,0.016,2
-"Teste: Grafo Completamente Conectado","Size: 5",Dijkstra,0.038,2
-"Teste: Grafo Completamente Conectado","Size: 5",Johnson,0.107,13
-"Teste: Grafo Completamente Conectado","Size: 10",Bellman-Ford,0.023,2
-"Teste: Grafo Completamente Conectado","Size: 10",Dijkstra,0.046,5
-"Teste: Grafo Completamente Conectado","Size: 10",Johnson,0.290,44
-"Teste: Grafo Completamente Conectado","Size: 100",Bellman-Ford,1.520,989
-"Teste: Grafo Completamente Conectado","Size: 100",Dijkstra,1.202,324
-"Teste: Grafo Completamente Conectado","Size: 100",Johnson,122.290,18798
-"Teste: Grafo com Componentes Desconexos","Size: 5",Bellman-Ford,0.011,111
-"Teste: Grafo com Componentes Desconexos","Size: 5",Dijkstra,0.017,80
-"Teste: Grafo com Componentes Desconexos","Size: 5",Johnson,0.026,80
-"Teste: Grafo com Componentes Desconexos","Size: 10",Bellman-Ford,0.016,80
-"Teste: Grafo com Componentes Desconexos","Size: 10",Dijkstra,0.018,80
-"Teste: Grafo com Componentes Desconexos","Size: 10",Johnson,0.045,80
-"Teste: Grafo com Componentes Desconexos","Size: 100",Bellman-Ford,2.523,55
-"Teste: Grafo com Componentes Desconexos","Size: 100",Dijkstra,0.146,55
-"Teste: Grafo com Componentes Desconexos","Size: 100",Johnson,16.214,2718
-"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 5",Bellman-Ford,0.020,53
-"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 5",Johnson,0.034,53
-"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 10",Bellman-Ford,0.038,53
-"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 10",Johnson,0.060,53
-"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 100",Bellman-Ford,57.314,53
-"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 100",Johnson,55.924,53
-"Teste: Grafo Muito Grande e Esparso","Size: 500",Bellman-Ford,210.791,991
-"Teste: Grafo Muito Grande e Esparso","Size: 500",Dijkstra,2.006,317
-"Teste: Grafo Muito Grande e Esparso","Size: 500",Johnson,1101.813,33389
+"Teste: Grafos com arestas negativas","Size: 5",Bellman-Ford,0.060,84
+"Teste: Grafos com arestas negativas","Size: 5",Johnson,0.345,91
+"Teste: Grafos com arestas negativas","Size: 5",FloydWarshall,0.050,83
+"Teste: Grafos com arestas negativas","Size: 10",Bellman-Ford,0.026,61
+"Teste: Grafos com arestas negativas","Size: 10",Johnson,0.103,63
+"Teste: Grafos com arestas negativas","Size: 10",FloydWarshall,0.076,61
+"Teste: Grafos com arestas negativas","Size: 100",Bellman-Ford,42.094,61
+"Teste: Grafos com arestas negativas","Size: 100",Johnson,50.620,61
+"Teste: Grafos com arestas negativas","Size: 100",FloydWarshall,1.514,61
+"Teste Comparação Bellman Ford: Matriz e Lista de Adjacência","Size: 5",Matrix,0.019,61
+"Teste Comparação Bellman Ford: Matriz e Lista de Adjacência","Size: 5",List,0.045,61
+"Teste Comparação Bellman Ford: Matriz e Lista de Adjacência","Size: 10",Matrix,0.068,63
+"Teste Comparação Bellman Ford: Matriz e Lista de Adjacência","Size: 10",List,0.051,61
+"Teste Comparação Bellman Ford: Matriz e Lista de Adjacência","Size: 100",Matrix,44.845,63
+"Teste Comparação Bellman Ford: Matriz e Lista de Adjacência","Size: 100",List,0.012,61
+"Teste: Grafo Completamente Conectado","Size: 5",Bellman-Ford,0.010,61
+"Teste: Grafo Completamente Conectado","Size: 5",Dijkstra,0.034,61
+"Teste: Grafo Completamente Conectado","Size: 5",Johnson,0.083,61
+"Teste: Grafo Completamente Conectado","Size: 5",FloydWarshall,0.801,61
+"Teste: Grafo Completamente Conectado","Size: 10",Bellman-Ford,0.020,61
+"Teste: Grafo Completamente Conectado","Size: 10",Dijkstra,0.042,61
+"Teste: Grafo Completamente Conectado","Size: 10",Johnson,0.192,63
+"Teste: Grafo Completamente Conectado","Size: 10",FloydWarshall,0.322,61
+"Teste: Grafo Completamente Conectado","Size: 100",Bellman-Ford,1.423,80
+"Teste: Grafo Completamente Conectado","Size: 100",Dijkstra,0.991,324
+"Teste: Grafo Completamente Conectado","Size: 100",Johnson,100.003,15705
+"Teste: Grafo Completamente Conectado","Size: 100",FloydWarshall,43.568,512
+"Teste: Grafo com Componentes Desconexos","Size: 5",Bellman-Ford,0.010,81
+"Teste: Grafo com Componentes Desconexos","Size: 5",Dijkstra,0.015,81
+"Teste: Grafo com Componentes Desconexos","Size: 5",Johnson,0.033,81
+"Teste: Grafo com Componentes Desconexos","Size: 5",FloydWarshall,0.208,81
+"Teste: Grafo com Componentes Desconexos","Size: 10",Bellman-Ford,0.014,81
+"Teste: Grafo com Componentes Desconexos","Size: 10",Dijkstra,0.015,81
+"Teste: Grafo com Componentes Desconexos","Size: 10",Johnson,0.038,81
+"Teste: Grafo com Componentes Desconexos","Size: 10",FloydWarshall,0.274,81
+"Teste: Grafo com Componentes Desconexos","Size: 100",Bellman-Ford,2.110,70
+"Teste: Grafo com Componentes Desconexos","Size: 100",Dijkstra,0.142,70
+"Teste: Grafo com Componentes Desconexos","Size: 100",Johnson,12.506,2825
+"Teste: Grafo com Componentes Desconexos","Size: 100",FloydWarshall,35.422,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 5",Bellman-Ford,0.024,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 5",Johnson,0.040,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 5",FloydWarshall,0.034,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 10",Bellman-Ford,0.026,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 10",Johnson,0.046,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 10",FloydWarshall,0.029,70
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 100",Bellman-Ford,42.030,71
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 100",Johnson,52.432,71
+"Teste: Grafo Direcionado Denso com Arestas Negativas","Size: 100",FloydWarshall,1.617,71
+"Teste: Grafo Muito Grande e Esparso","Size: 500",Bellman-Ford,217.149,103
+"Teste: Grafo Muito Grande e Esparso","Size: 500",Dijkstra,1.701,299
+"Teste: Grafo Muito Grande e Esparso","Size: 500",Johnson,954.167,32240
+"Teste: Grafo Muito Grande e Esparso","Size: 500",FloydWarshall,3089.158,1024

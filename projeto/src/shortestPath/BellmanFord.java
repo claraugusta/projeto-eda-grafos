@@ -46,35 +46,9 @@ public class BellmanFord {
         return distances;
     }
 
-    public static int[] bellmanFord(AdjListWeighted graph, int src) {
-        int V = graph.size();
-        int[] dist = new int[V];
-        Arrays.fill(dist, INF);
-        dist[src] = 0;
-
-        for (int i = 0; i < V - 1; i++) {
-            for (int u = 0; u < V; u++) {
-                for (AdjListWeighted.Edge edge : graph.getAdj(u)) {
-                    if (dist[edge.nodeIn] != INF && dist[edge.nodeIn] + edge.weight < dist[edge.nodeOut]) {
-                        dist[edge.nodeOut] = dist[edge.nodeIn] + edge.weight;
-                    }
-                }
-            }
-
-        }
-        for (int i = 0; i < V; i++) {
-            for (AdjListWeighted.Edge edge : graph.getAdj(i)) {
-                if (dist[edge.nodeIn] != INF && dist[edge.nodeIn] + edge.weight < dist[edge.nodeOut]) {
-                    throw new IllegalStateException("Ciclo negativo detectado");
-                }
-            }
-        }
-        return dist;
-    }
-
 
     public static void main(String[] args) {
-        AdjListWeighted graph = new AdjListWeighted(5);
+        Graph graph = new AdjListWeighted(5);
         graph.addEdge(0, 1, -1);
         graph.addEdge(0, 2, 4);
         graph.addEdge(1, 2, 3);
@@ -84,7 +58,7 @@ public class BellmanFord {
         graph.addEdge(3, 1, 1);
         graph.addEdge(4, 3, -3);
 
-        System.out.println(Arrays.toString(bellmanFord(graph, 0)));
+        System.out.println(Arrays.toString(bellmanFord(graph, 0, graph.size())));
         int[][] graph1 = {
                 {  0,  -1,   4,  INF, INF },
                 { INF,   0,   3,   2,   2 },

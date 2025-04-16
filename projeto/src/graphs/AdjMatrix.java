@@ -121,12 +121,4 @@ public class AdjMatrix implements Graph{
         return this.adjMatrix.length;
     }
 
-//    public String toString(){
-//        String out = "";
-//        for (int i = 0; i < this.maxNodes; i++) {
-//            out += "pos: " + i + ", node: " + this.nodes[i] + "\n";
-//        }
-//        return out;
-//    }
-
 }

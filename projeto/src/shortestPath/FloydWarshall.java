@@ -29,8 +29,7 @@ public class FloydWarshall {
         }
         for (int i = 0; i < dist.length; i++) {
             if (dist[i][i] < 0) {
-                System.out.println("Ciclo negativo !");
-                break;
+                throw new IllegalArgumentException();
             }
         }
 
