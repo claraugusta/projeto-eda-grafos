@@ -1,6 +1,5 @@
 package benchmark;
 
-import graphs.AdjListWeighted;
 import graphs.Graph;
 import static shortestPath.BellmanFord.bellmanFord;
 import static shortestPath.Dijkstra.dijkstra;
@@ -37,13 +36,13 @@ public class ShortestPathBenchmark {
             }
 
 
-            title = "Teste: Comparação Bellman Ford, Matriz de Adjancência e Lista de Adjacência";
+            title = "Teste Comparação Bellman Ford: Matriz e Lista de Adjacência";
             System.out.println(title);
             for(int size : sizes){
                 double density = 0.5;
                 double negProb = 0.2;
                 Graph adjMatrix = g.generateDirectedAdjMatrixNegativeEdges(size, INF, density, negProb, 50);
-                AdjListWeighted adjListWeighted = g.generateAdjListWeighted(size, density, negProb, 50);
+                Graph adjListWeighted = g.generateAdjListWeighted(size, density, negProb, 50);
                 runBenchmarkBellman(writer, title, size, density, negProb, adjMatrix, adjListWeighted);
             }
 
@@ -196,7 +195,7 @@ public class ShortestPathBenchmark {
         System.out.println();
     }
 
-    public static void runBenchmarkBellman(PrintWriter writer,String title, int size, double density, double negProb, Graph adjMatrix, AdjListWeighted adjList) {
+    public static void runBenchmarkBellman(PrintWriter writer,String title, int size, double density, double negProb, Graph adjMatrix, Graph adjList) {
         double totalTimeAdjMatrix = 0;
         double totalTimeAdjList = 0;
         long totalMemoryAdjMatrix = 0;
@@ -222,7 +221,7 @@ public class ShortestPathBenchmark {
 
             long startTimeAdjList = System.nanoTime();
             try {
-                bellmanFord(adjList, 0);
+                bellmanFord(adjList, 0, adjList.numberOfNodes());
             } catch (Exception e) {
             }
             long endTimeAdjList = System.nanoTime();
@@ -244,4 +243,5 @@ public class ShortestPathBenchmark {
         writer.printf("\"%s\",\"%s\",List,%.3f,%d\n",title, cenario, totalTimeAdjList, totalMemoryAdjList);
         System.out.println();
     }
+
 }
