@@ -59,37 +59,4 @@ public class Johnson {
 
         return distances;
     }
-
-
-    public static void main(String[] args) {
-        // Criando um grafo com 4 vértices
-        Graph graph = new AdjMatrix(4, INF);
-
-        Graph adj = new AdjMatrix(5, new int[][] {
-                {0, 3, 8, INF, -4},  // Arestas do vértice 0
-                {INF, 0, INF, 1, 7},  // Arestas do vértice 1
-                {INF, 4, 0, INF, INF}, // Arestas do vértice 2
-                {2, INF, -5, 0, INF},  // Arestas do vértice 3
-                {INF, INF, INF, 6, 0}  // Arestas do vértice 4
-        });
-
-        Graph graph1 = new AdjMatrix(4, new int[][] {
-                {0, -4, 2, INF},  // Arestas do vértice 0
-                {INF, 0, 5, INF}, // Arestas do vértice 1
-                {INF, INF, 0, -3}, // Arestas do vértice 2
-                {INF, INF, INF, 0} // Arestas do vértice 3
-        });
-
-        Graph graph3 = new AdjMatrix(5, new int[][] {
-                {0, 6, INF, 7, INF},  // Arestas do vértice 0
-                {INF, 0, 5, 8, -4},   // Arestas do vértice 1
-                {INF, -2, 0, INF, INF}, // Arestas do vértice 2
-                {INF, INF, -3, 0, 9},  // Arestas do vértice 3
-                {2, INF, INF, INF, 0}  // Arestas do vértice 4
-        });
-
-        Johnson johnson = new Johnson();
-
-        johnson.johnson(graph3);
-    }
 }
