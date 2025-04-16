@@ -145,6 +145,19 @@ public class ShortestPathBenchmark {
             long memoryAfterFloydWarshall = runtime.totalMemory() - runtime.freeMemory();
             totalMemoryFloydWarshall += (memoryAfterFloydWarshall - memoryBeforeFloydWarshall) / 1024;
             totalTimeFloydWarshall += (endTimeFloydWarshall - startTimeFloydWarshall) / 1e6;
+
+            runtime.gc();
+            long memoryBeforeNearestNeighbor = runtime.totalMemory() - runtime.freeMemory();
+
+            long startTimeNearestNeighbor  = System.nanoTime();
+            try {
+                nearestNeighbor(graph,0);
+            } catch (Exception e) {
+            }
+            long endTimeNearestNeighbor  = System.nanoTime();
+            long memoryAfterNearestNeighbor  = runtime.totalMemory() - runtime.freeMemory();
+            totalMemoryNearestNeighbor  += (memoryAfterNearestNeighbor  - memoryBeforeNearestNeighbor) / 1024;
+            totalTimeNearestNeighbor  += (endTimeNearestNeighbor  - startTimeNearestNeighbor) / 1e6;
         }
 
 
@@ -152,10 +165,13 @@ public class ShortestPathBenchmark {
         totalTimeBellmanFord /= 30.0;
         totalTimeDijkstra /= 30.0;
         totalTimeJohnson /= 30.0;
-        totalMemoryFloydWarshall /= 30.0;
+        totalTimeFloydWarshall /= 30.0;
+        totalTimeNearestNeighbor /= 30.0;
         totalMemoryBellmanFord /= 30.0;
         totalMemoryDijkstra /= 30.0;
         totalMemoryJohnson /= 30.0;
+        totalMemoryFloydWarshall /= 30.0;
+        totalMemoryNearestNeighbor /= 30.0;
 
         String cenario = String.format("Size: %d", size, density, negProb);
         System.out.println(cenario);
@@ -163,10 +179,12 @@ public class ShortestPathBenchmark {
         System.out.println("(Dijkstra) Time: " + totalTimeDijkstra + " ms, Memory: " + totalMemoryDijkstra + " KB");
         System.out.println("(Johnson) Time: " + totalTimeJohnson + " ms, Memory: " + totalMemoryJohnson + " KB");
         System.out.println("(FloydWarshall) Time: " + totalTimeFloydWarshall + " ms, Memory: " + totalMemoryFloydWarshall + " KB");
+        System.out.println("(NearestNeighbor) Time: " + totalTimeNearestNeighbor + " ms, Memory: " + totalMemoryNearestNeighbor + " KB");
         writer.printf("\"%s\",\"%s\",Bellman-Ford,%.3f,%d\n",title, cenario, totalTimeBellmanFord, totalMemoryBellmanFord);
         writer.printf("\"%s\",\"%s\",Dijkstra,%.3f,%d\n",title, cenario, totalTimeDijkstra, totalMemoryDijkstra);
         writer.printf("\"%s\",\"%s\",Johnson,%.3f,%d\n",title, cenario, totalTimeJohnson, totalMemoryJohnson);
         writer.printf("\"%s\",\"%s\",FloydWarshall,%.3f,%d\n",title, cenario, totalTimeFloydWarshall, totalMemoryFloydWarshall);
+        writer.printf("\"%s\",\"%s\",NearestNeighbor,%.3f,%d\n",title, cenario, totalTimeNearestNeighbor, totalMemoryNearestNeighbor);
         System.out.println();
     }
 
