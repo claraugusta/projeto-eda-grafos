@@ -19,7 +19,7 @@ public class ShortestPathBenchmark {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
-        int[] sizes = {5, 10, 100};
+        int[] sizes = {100, 500, 1000};
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("data/benchmark_Shortest_path.csv"))) {
             writer.println("Titulo,Cenario,Algoritmo,Tempo(ms),Memoria(KB)");
